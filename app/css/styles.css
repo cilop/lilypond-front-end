@@ -38,7 +38,7 @@ div {
   width: 100%;
   height: 70%;
   position: absolute;
-  top: 35%;
+  top: 32%;
 }
 
 #main {
@@ -96,7 +96,7 @@ div {
 
 #shortcuts {
   width: 100%;
-  height: 75%;
+  height: 70%;
   border: solid blue;
 }
 

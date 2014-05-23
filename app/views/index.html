@@ -3,9 +3,10 @@
   <head>
     <link rel='stylesheet' href='../css/styles.css'>
     <link rel='stylesheet' href='../css/keys.css'>
+    <script src='../bower_components/jquery/dist/jquery.js'></script>
     <script src='../bower_components/angular/angular.js'></script>
     <script src='../js/helper.js'></script>
-    <script src='../bower_components/jquery/dist/jquery.js'></script>
+    <script src='../js/keyboard.js'></script>
     <script src='../js/app.js'></script>
   </head>
 
@@ -98,6 +99,18 @@
 
       <div id="main">
         main
+        <div id='layer'>
+          layer
+          <div id='meta'>
+            meta
+          </div>
+          <div id='staff'>
+            staff
+            <input ng-model='input' ng-keypress='press($event)'>
+
+            <div> {{ note }} </div>
+          </div>
+        </div>
         <div id='layer'>
           layer
           <div id='meta'>
