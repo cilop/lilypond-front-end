@@ -2,6 +2,14 @@ window.helper = {};
 
 helper.staves = 0;
 
+helper.animateKey = function(key){
+  var element = $('.' + helper.class(key))
+  element.addClass('light');
+  setTimeout(function(){
+    element.removeClass('light');
+  }, 50)
+}
+
 helper.addStaff = function(){
   $('#main').append(helper.layer);
   helper.staves++;
@@ -11,6 +19,7 @@ helper.layer = "<div id='layer'>layer<div id='meta'>meta</div><div id='staff'>st
 
 helper.events = function(key){
   console.log(key)
+  helper.animateKey(key);
 
   if (key === 'z'){
     helper.addStaff();

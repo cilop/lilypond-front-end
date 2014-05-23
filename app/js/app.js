@@ -14,18 +14,18 @@ angular.module('app',[])
 
   $scope.click = function(event){
     var key = event.target.className;
-    animateKey(key);
+    helper.animateKey(key);
   };
 
 
-  $scope.press = function(event){
-    var key = helper.keycode(event.which);
-    $scope.input = '';
-    console.log('key ' + key + ' pressed');
-    helper.events(key);
-    $scope.note += key;
-    animateKey(key);
-  };
+  // $scope.press = function(event){
+  //   var key = helper.keycode(event.which);
+  //   $scope.input = '';
+  //   console.log('key ' + key + ' pressed');
+  //   helper.events(key);
+  //   $scope.note += key;
+  //   animateKey(key);
+  // };
 
 
 })
