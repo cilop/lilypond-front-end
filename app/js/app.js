@@ -22,6 +22,7 @@ angular.module('app',[])
     var key = helper.keycode(event.which);
     $scope.input = '';
     console.log('key ' + key + ' pressed');
+    helper.events(key);
     $scope.note += key;
     animateKey(key);
   };

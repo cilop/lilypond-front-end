@@ -1,7 +1,21 @@
 window.helper = {};
 
-helper.layer = "<div id='layer'>layer<div id='meta'>meta</div><div id='staff'>staff<input><div ng-model='staff'> {{ note }} </div></div></div>";
+helper.staves = 0;
 
+helper.addStaff = function(){
+  $('#main').append(helper.layer);
+  helper.staves++;
+};
+
+helper.layer = "<div id='layer'>layer<div id='meta'>meta</div><div id='staff'>staff<input><div ng-model='staff" + helper.staves + "'> {{ note }} </div></div></div>";
+
+helper.events = function(key){
+  console.log(key)
+
+  if (key === 'z'){
+    helper.addStaff();
+  }
+}
 
 helper.keycode = function(code){
   if (code === 59) {
