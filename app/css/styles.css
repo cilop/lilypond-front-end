@@ -26,6 +26,15 @@ svg {
 .panel.panel-default.shortcuts {
  width: 100%; 
 }
+
+.label-shortcuts {
+  text-align: center;
+}
+
+#shortcut-row {
+  text-align: center;
+}
+
 /*
 body {
   float: left;
