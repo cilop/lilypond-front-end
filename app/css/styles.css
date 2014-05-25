@@ -1,6 +1,10 @@
+.panel-body {
+  padding: 10px;
+}
+
 .panel.panel-default {
   float: right;
-  width: 90%;
+  width: 89%;
 }
 
 .btn-group-vertical {
@@ -17,6 +21,10 @@ svg {
 
 .left-track {
   float:left;
+}
+
+.panel.panel-default.shortcuts {
+ width: 100%; 
 }
 /*
 body {
