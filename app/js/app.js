@@ -15,6 +15,7 @@ angular.module('app',[])
 
 .directive('ngStaff', function($compile) {
   var staffNum = 0;
+
   return {
     restrict: 'EA',
     require: ['^ngModel'],
@@ -25,17 +26,21 @@ angular.module('app',[])
       // staffNum: staffNum++
     },
     templateUrl: 'staff.html',
-    controller: function($scope, $element){
+    controller: function($scope, $element, $compile){
 
       $element.keydown(function(event){
-        
-        helper.events(event.which);
+        var key = helper.animateKey(event.which);
+        if (key === 'z') {
+          var el = $compile('<div ng-model="staff" ng-staff tabindex="0"></div>')($scope);
+          $element.parent().append(el);
+        }
       });
 
     },
     link: function(scope, ele, attr) {
 
-
+      staffNum++;
+      scope.staffNum = staffNum;
       // console.log('link called');
       // ele.bind('keydown keypress', function(event){
       //   console.log(event)

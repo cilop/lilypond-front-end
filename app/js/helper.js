@@ -3,14 +3,14 @@
 window.helper = {};
 
 helper.animateKey = function(key){
-  var element = $('.' + helper.class(helper.keycode(key)));
+  var key = helper.class(helper.keycode(key));
+  var element = $('.' + key);
   element.toggleClass('dark');
   setTimeout(function(){
     element.toggleClass('dark');
   }, 50);
+  return key;
 };
-
-helper.layer = "<div id='layer' ng-model='layer" + helper.staves + "'>layer<div id='meta'>meta</div><div id='staff'>staff<input><div ng-model='staff" + helper.staves + "'> {{ note }} </div></div></div>";
 
 helper.events = function(key){
   helper.animateKey(key);
