@@ -13,7 +13,7 @@ angular.module('app',[])
 
 })
 
-.directive('ngStaff', function() {
+.directive('ngStaff', function($compile) {
   return {
     restrict: 'EA',
     require: ['^ngModel'],
@@ -25,6 +25,11 @@ angular.module('app',[])
     templateUrl: 'staff.html',
     link: function(scope, ele, attr) {
       console.log('link called');
+      ele.bind('click', function(){
+        alert('element clicked')
+        var el = $compile('<div ng-model="staff" ng-staff></div>')(scope);
+        ele.parent().append(el);
+      });
       // scope.duration = scope.ngModel.audio[0].duration.$text;
     }
   };
@@ -32,9 +37,9 @@ angular.module('app',[])
 })
 
 .controller('stavesCtrl', function($scope){
-  $scope.select = function(){
-    alert('staff clicked');
-  };
+  // $scope.select = function(){
+  //   console.log(arguments);
+  // };
 });
 
 // .directive('ngLayer', function( $compile ){
