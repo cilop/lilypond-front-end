@@ -1,12 +1,14 @@
+"use strict";
+
 window.helper = {};
 
 helper.staves = 0;
 
 helper.animateKey = function(key){
   var element = $('.' + helper.class(key))
-  element.addClass('light');
+  element.addClass('dark');
   setTimeout(function(){
-    element.removeClass('light');
+    element.removeClass('dark');
   }, 50)
 }
 
