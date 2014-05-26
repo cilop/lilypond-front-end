@@ -29,6 +29,12 @@ angular.module('app',[])
     }
   };
 
+})
+
+.controller('stavesCtrl', function($scope){
+  $scope.select = function(){
+    alert('staff clicked');
+  };
 });
 
 // .directive('ngLayer', function( $compile ){
