@@ -27,14 +27,8 @@ angular.module('app',[])
     templateUrl: 'staff.html',
     controller: function($scope, $element){
 
-      $scope.key = function(event){
-        console.log(event);
-      };
-
       $element.keydown(function(event){
-
-        //console.log(angular.element($scope))
-        console.log(event.which);
+        
         helper.events(event.which);
       });
 
