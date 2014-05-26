@@ -12,8 +12,8 @@
 kbd, .key {
   display: inline;
   display: inline-block;
-  min-width: 42px;
-  height: 20px;
+  width: 42px;
+  height: 40px;
   padding: .2em .9em;
   font: normal .85em/1 "Lucida Grande", Lucida, Arial, sans-serif;
   text-align: left;

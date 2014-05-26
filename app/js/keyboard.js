@@ -1,4 +1,4 @@
-// console.log('keyboard loaded!')
+"use strict";
 
 $(function(){
 

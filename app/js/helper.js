@@ -6,10 +6,10 @@ helper.staves = 0;
 
 helper.animateKey = function(key){
   var element = $('.' + helper.class(key))
-  element.addClass('dark');
+  element.toggleClass('dark');
   setTimeout(function(){
-    element.removeClass('dark');
-  }, 50)
+    element.toggleClass('dark');
+  }, 50);
 }
 
 helper.addStaff = function(){
