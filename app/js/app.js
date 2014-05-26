@@ -13,6 +13,24 @@ angular.module('app',[])
 
 })
 
+.directive('ngStaff', function() {
+  return {
+    restrict: 'EA',
+    require: ['^ngModel'],
+    replace: true,
+    scope: {
+      ngModel: '=',
+      select: '&'
+    },
+    templateUrl: 'staff.html',
+    link: function(scope, ele, attr) {
+      console.log('link called');
+      // scope.duration = scope.ngModel.audio[0].duration.$text;
+    }
+  };
+
+});
+
 // .directive('ngLayer', function( $compile ){
 
 //   var html = "<div ng-click='add()' id='layer'>layer<div id='meta'>meta</div><div id='staff'>staff<input><div>{{ note }}</div></div></div>";
