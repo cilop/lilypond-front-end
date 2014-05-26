@@ -195,8 +195,8 @@
     </div>
   </div>
 
-  <div id='main' ng-controller='stavesCtrl'>
-    <div ng-staff ng-model='staff' ng-click='select(staff)'>
+  <div id='main'>
+    <div ng-staff ng-keydown='key($event)' ng-model='staff' tabindex='0'>
     </div>
   </div>
 

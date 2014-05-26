@@ -8,12 +8,13 @@ angular.module('app',[])
   $scope.click = function(event){
     var key = event.target.className;
     helper.animateKey(key);
-
   };
+
 
 })
 
 .directive('ngStaff', function($compile) {
+  var staffNum = 0;
   return {
     restrict: 'EA',
     require: ['^ngModel'],
@@ -21,26 +22,40 @@ angular.module('app',[])
     scope: {
       ngModel: '=',
       select: '&'
+      // staffNum: staffNum++
     },
     templateUrl: 'staff.html',
-    link: function(scope, ele, attr) {
-      console.log('link called');
-      ele.bind('click', function(){
-        alert('element clicked')
-        var el = $compile('<div ng-model="staff" ng-staff></div>')(scope);
-        ele.parent().append(el);
+    controller: function($scope, $element){
+
+      $scope.key = function(event){
+        console.log(event);
+      };
+
+      $element.keydown(function(event){
+
+        //console.log(angular.element($scope))
+        console.log(event.which);
+        helper.events(event.which);
       });
-      // scope.duration = scope.ngModel.audio[0].duration.$text;
+
+    },
+    link: function(scope, ele, attr) {
+
+
+      // console.log('link called');
+      // ele.bind('keydown keypress', function(event){
+      //   console.log(event)
+      //   if (event.which === 122) {
+      //     var el = $compile('<div ng-model="staff" ng-staff></div>')(scope);
+      //     ele.parent().append(el);
+      //   }
+      // });
+      
     }
   };
 
 })
 
-.controller('stavesCtrl', function($scope){
-  // $scope.select = function(){
-  //   console.log(arguments);
-  // };
-});
 
 // .directive('ngLayer', function( $compile ){
 

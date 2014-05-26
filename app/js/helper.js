@@ -5,7 +5,10 @@ window.helper = {};
 helper.staves = 0;
 
 helper.animateKey = function(key){
-  var element = $('.' + helper.class(key))
+  // console.log('.' + helper.class(helper.keycode(key)))
+  var element = $('.' + helper.class(helper.keycode(key)));
+  // console.log(helper.class(key))
+  // console.log(element)
   element.toggleClass('dark');
   setTimeout(function(){
     element.toggleClass('dark');
@@ -30,6 +33,7 @@ helper.events = function(key){
 }
 
 helper.keycode = function(code){
+  console.log(code)
   if (code === 59) {
     return ';';
   }
@@ -44,7 +48,8 @@ helper.keycode = function(code){
   }
 
   var letters = 'abcdefghijklmnopqrstuvwxyz';
-  return letters[code - 97];
+  console.log(letters[code - 65])
+  return letters[code - 65];
 };
 
 helper.class = function(char){
