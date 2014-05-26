@@ -13,7 +13,7 @@ angular.module('app',[])
 
 })
 
-.directive('ngStaff', function($compile) {
+.directive('ngTrack', function($compile) {
   var staffNum = 0;
 
   return {
