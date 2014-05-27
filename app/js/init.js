@@ -3,11 +3,14 @@
 // var path = require('path');
 // console.log('---')
 // var path = process.cwd() + '/';
-var path = require('path');
+// var path = require('path');
 require('nw.gui').Window.get().showDevTools();
+var fs = require('fs');
 // alert(path.dirname(process.execPath))
-console.log(process)
-console.log(process.cwd())
+// console.log(process)
+// console.log(process.cwd())
+
+// var proyectPath = process.cwd() + '/proyects/';
 
 $(function(){
 
@@ -15,38 +18,28 @@ $(function(){
     $('#fileUpload').click();
   });
 
-  $('#fileUpload').on('change',function(event){
+  $('#fileUpload').on('change',function(){
 
-    console.log($('#fileUpload').get(0).files[0])
     var file = $('#fileUpload').get(0).files[0];
+    var filename = file.name;
+    var filepath = file.path;
+    filepath = filepath.replace(filename,'');
 
     var data = new FileReader();
+    data.readAsText(file);
+
     data.onloadend = function() {
-      console.log('done loading');
-      console.log(data.result);
-    };
-    var result = data.readAsText(file);
-
-    console.log(result);
-    console.log(file);
-
-    var dummyData = {
-      key: 'pair',
-      key2: 'pair2',
-      nested: {
-        key3: 'pair'
+      try {
+        var fileContents = JSON.parse(data.result);
+        alert('Successfuly read file');
+        console.log(fileContents);
+      } 
+      catch (err) {
+        alert('File is unreadable, make sure you selected the correct JSON file');
       }
     };
-
-    // fs.readFile(path + 'proyects/' + filename, JSON.stringify(dummyData), function(err){
-    //   if (err){
-    //     alert(err);
-    //   } else {
-    //     alert('no error')
-    //   }
-    // });
-
-  })
+    
+  });
 
 
 });
