@@ -11,10 +11,14 @@
     <link rel='stylesheet' href='../css/keys.css'>
     <link rel='stylesheet' href='../css/styles.css'>
     <script src='../bower_components/jquery/dist/jquery.js'></script>
+    <script src='../bower_components/underscore/underscore.js'></script>
     <script src='../bower_components/angular/angular.js'></script>
     <script src='../js/helper.js'></script>
     <script src='../js/keyboard.js'></script>
     <script src='../js/app.js'></script>
+    <script src='../svg/musicSVG.js'></script>
+    <script src='../svg/paths.js'></script>
+    <script src='../js/leftBar.js'></script>
 
   </head>
   <body ng-app="app">
@@ -172,13 +176,14 @@
   <!-- STOP TOP NAV BAR -->
   <!-- ########################## -->
 
-  <div class="left-track">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <p>
-          Signatures here
-        </p>
-      </div>
+  <div class="left-bar">
+    <div left-bar ng-model="leftBarModel"></div>
+    <div class="left-bar-control">
+      <input type="text" ng-model="leftBarModel.key" placeholder="key">
+      <br>
+      <input type="text" ng-model="leftBarModel.time.top" placeholder="top time">
+      <br>
+      <input type="text" ng-model="leftBarModel.time.bottom" placeholder="bottom time">
     </div>
   </div>
 

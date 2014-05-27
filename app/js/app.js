@@ -1,5 +1,5 @@
 "use strict";
-angular.module('app',[])
+angular.module('app', ['leftBar'])
 
 .controller('mainCtrl', function($scope, $compile){
 
@@ -8,7 +8,19 @@ angular.module('app',[])
   $scope.click = function(event){
     var key = event.target.className;
     helper.animateKey(key);
+  };
 
+  $scope.leftBarModel = {
+    key: 0,
+    time: {
+      top: 4,
+      bottom: 4
+    },
+    staves: [
+      {
+        clef: 'treble'
+      }
+    ]
   };
 
 })

@@ -19,8 +19,9 @@ svg {
   /*viewBox:0 0 10 40;*/
 }
 
-.left-track {
-  float:left;
+.left-bar {
+  float: left;
+  background-color: #E5E5E5;
 }
 
 .panel.panel-default.shortcuts {
