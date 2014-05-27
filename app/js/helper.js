@@ -1,5 +1,8 @@
 "use strict";
 
+
+
+
 window.helper = {};
 
 helper.animateKey = function(key){
