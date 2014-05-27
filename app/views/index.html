@@ -1,111 +1,225 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <link rel='stylesheet' href='../css/styles.css'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lilypond GUI</title>
+
+    <!-- Bootstrap -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel='stylesheet' href='../css/keys.css'>
+    <link rel='stylesheet' href='../css/styles.css'>
     <script src='../bower_components/jquery/dist/jquery.js'></script>
     <script src='../bower_components/angular/angular.js'></script>
+    <script src='../js/lzadialog.js'></script>
     <script src='../js/helper.js'></script>
-    <script src='../js/keyboard.js'></script>
+    <script src='../js/init.js'></script>
     <script src='../js/app.js'></script>
+    <!-- <script src='../js/node-main.js'></script> -->
+
   </head>
+  <body ng-app="app">
 
-  <body ng-app='app' ng-controller='mainCtrl'>
+  <script type="text/ng-template" id="staff.html">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Staff 1 - Meta
+      </div>
+      <div class="panel-body">
+        <p>
+          Layer track here
+        </p>
+      </div>
+    </div>
+  </script>
 
+  <div id='container' ng-controller='mainCtrl'>
+  <!-- START TOP NAV BAR -->
+  <!-- ########################## -->
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Lilypond GUI</a>
+      </div>
 
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <div class="btn-group">
+              <!-- <input type="file" id='fileUpload'></input> -->
+            <button type='button' id='loadFile' class='btn btn-default btn-group-horizontal'>Load file</button>
+            <!-- <input type='file' id='fileSave'></input> -->
+            <button type='button' id='saveFile' class='btn btn-default btn-group-horizontal'>Save file</button>
+            </div>
+        </ul>
 
-    <div id='topContainer'>
+<!--         <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Link</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </li>
+        </ul> -->
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 
-      <div id='topPanel'>
+  <div class="panel panel-default shortcuts">
+    <div class="panel-body">
+      <div class='label-shortcuts'> <p> Keyboard shortcuts </p> </div>
+      <div id='shortcut-row'>
 
-        <div id='menu'>
-          menu
+        <span> 
+          <kbd class='q'>
+            <svg viewBox="0 0 25 25">
+              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
+            </svg>
+          q</kbd>
+        </span>
 
-        </div>
+        <span>
+          <kbd class='w'>
+            <svg viewBox="0 0 25 25">
+              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
+            </svg>
+          w</kbd>
+        </span>
+        <span>
+          <kbd class='e'>
+            <svg viewBox="0 0 25 25">
+              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
+            </svg>
+          e</kbd>
+        </span>
+        <span>
+          <kbd class='r'>
+            <svg viewBox="0 0 25 25">
+              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
+            </svg>
+          r</kbd>
+        </span>
+        <span>
+          <kbd class='t'>
+            <svg viewBox="0 0 25 25">
+              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
+            </svg>
+          t</kbd>
+        </span>
+        <span>
+          <kbd class='y'>
+            <svg viewBox="0 0 25 25">
+              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
+            </svg>
+          y</kbd>
+        </span>
+        <span>
+          <kbd class='u'>
+            <svg viewBox="0 0 25 25">
+              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
+            </svg>
+          u</kbd>
+        </span>
+        <span>
+          <kbd class='i'>
+            <svg viewBox="0 0 25 25">
+              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
+            </svg>
+          i</kbd>
+        </span>
+        <span>
+          <kbd class='o'>
+            <svg viewBox="0 0 25 25">
+              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
+            </svg>
+          o</kbd>
+        </span>
+        <span>
+          <kbd class='p'>
+            <svg viewBox="0 0 25 25">
+              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
+            </svg>
+          p</kbd>
+        </span>
 
-        <div id='shortcuts' ng-click='click($event)'>
-          shortcuts
-          <div id='row1'>
-          <!-- <span>&#9556;</span> -->
-            <!-- <kbd class='q'>q</kbd> -->
-            <kbd class='q'><svg viewBox="0 0 25 25">
-              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
-              </svg>q</kbd>
-              
-            <kbd class='w'><svg viewBox="0 0 25 25">
-              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
-              </svg>w</kbd>
-            <kbd class='e'><svg viewBox="0 0 25 25">
-              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
-              </svg>e</kbd>
-            <kbd class='r'><svg viewBox="0 0 25 25">
-              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
-              </svg>r</kbd>
-            <kbd class='t'><svg viewBox="0 0 25 25">
-              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
-              </svg>t</kbd>
-            <kbd class='y'><svg viewBox="0 0 25 25">
-              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
-              </svg>y</kbd>
-            <kbd class='u'><svg viewBox="0 0 25 25">
-              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
-              </svg>u</kbd>
-            <kbd class='i'><svg viewBox="0 0 25 25">
-              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
-              </svg>i</kbd>
-            <kbd class='o'><svg viewBox="0 0 25 25">
-              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
-              </svg>o</kbd>
-            <kbd class='p'><svg viewBox="0 0 25 25">
-              <path d="M24.778,21.419 19.276,15.917 24.777,10.415 21.949,7.585 16.447,13.087 10.945,7.585 8.117,10.415 13.618,15.917 8.116,21.419 10.946,24.248 16.447,18.746 21.948,24.248z">
-              </svg>p</kbd>
-          </div>
-          <br>
-          <div id='row2'>
-            <kbd class='a'>a -- &#9833;</kbd>
-            <kbd class='s'>s -- &#9834;</kbd>
-            <kbd class='d'>d -- &#9835;</kbd>
-            <kbd class='f'>f -- &#9836;</kbd>
-            <kbd class='g'>g -- &#9837;</kbd>
-            <kbd class='h'>h -- &#9838;</kbd>
-            <kbd class='j'>j -- &#9839;</kbd>
-            <kbd class='k'>k -- &#9840;</kbd>
-            <kbd class='l'>l -- &#9841;</kbd>
-            <kbd class='semc'>; -- &#9842;</kbd>
-          </div>
-          <br>
-          <div id='row3'>
-            <kbd class='z'>z (add staff)</kbd>
-            <kbd class='x'>x</kbd>
-            <kbd class='c'>c</kbd>
-            <kbd class='v'>v</kbd>
-            <kbd class='b'>b</kbd>
-            <kbd class='n'>n</kbd>
-            <kbd class='m'>m</kbd>
-            <kbd class='comma'>,</kbd>
-            <kbd class='dot'>.</kbd>
-            <kbd class='slash'>/</kbd>
-          </div>
-        </div>
+      </div>
 
+      <div id='shortcut-row'>
+        <span><kbd class='a'>a</kbd></span>
+        <span><kbd class='s'>s</kbd></span>
+        <span><kbd class='d'>d</kbd></span>
+        <span><kbd class='f'>f</kbd></span>
+        <span><kbd class='g'>g</kbd></span>
+        <span><kbd class='h'>h</kbd></span>
+        <span><kbd class='j'>j</kbd></span>
+        <span><kbd class='k'>k</kbd></span>
+        <span><kbd class='l'>l</kbd></span>
+        <span><kbd class='semc'>;</kbd></span>
+      </div>
+
+      <div id='shortcut-row'>
+        <span><kbd class='z'>z</kbd></span>
+        <span><kbd class='x'>x</kbd></span>
+        <span><kbd class='c'>c</kbd></span>
+        <span><kbd class='v'>v</kbd></span>
+        <span><kbd class='b'>b</kbd></span>
+        <span><kbd class='n'>n</kbd></span>
+        <span><kbd class='m'>m</kbd></span>
+        <span><kbd class='comma'>,</kbd></span>
+        <span><kbd class='dot'>.</kbd></span>
+        <span><kbd class='slash'>/</kbd></span>
       </div>
 
     </div>
+  </div>
 
-    <div id='mainContainer'>
+  </nav>
+  <!-- STOP TOP NAV BAR -->
+  <!-- ########################## -->
 
-      <div id='leftPanel'>
-        leftPanel
+  <div class="left-track">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          Signatures here
+        </p>
       </div>
-
-      <div id="main" ng-controller="layerCtrl">
-        main
-        <ng-layer></ng-layer>
-      </div>
-
     </div>
+  </div>
 
+  <div id='main'>
+    <div ng-track ng-keydown='key($event)' ng-model='staff' tabindex='0'>
+    </div>
+  </div>
+
+<!--   <div class="panel panel-default">
+    <div class="panel-heading">
+      Staff 1 - Meta
+    </div>
+    <div class="panel-body">
+      <p>
+        Layer track here
+      </p>
+    </div>
+  </div> -->
+
+  <!-- END MAIN DIV
+  ############ -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   </body>
-
-
 </html>

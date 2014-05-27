@@ -1,35 +1,26 @@
 "use strict";
 
+
+
+
 window.helper = {};
 
-helper.staves = 0;
-
 helper.animateKey = function(key){
-  var element = $('.' + helper.class(key))
+  var key = helper.class(helper.keycode(key));
+  var element = $('.' + key);
   element.toggleClass('dark');
   setTimeout(function(){
     element.toggleClass('dark');
   }, 50);
-}
-
-helper.addStaff = function(){
-  $('#main').append(helper.layer);
-  helper.staves++;
+  return key;
 };
 
-helper.layer = "<div id='layer' ng-model='layer" + helper.staves + "'>layer<div id='meta'>meta</div><div id='staff'>staff<input><div ng-model='staff" + helper.staves + "'> {{ note }} </div></div></div>";
-
 helper.events = function(key){
-  console.log(key)
   helper.animateKey(key);
-
-  if (key === 'z'){
-    // helper.addStaff();
-
-  }
-}
+};
 
 helper.keycode = function(code){
+  
   if (code === 59) {
     return ';';
   }
@@ -44,7 +35,7 @@ helper.keycode = function(code){
   }
 
   var letters = 'abcdefghijklmnopqrstuvwxyz';
-  return letters[code - 97];
+  return letters[code - 65];
 };
 
 helper.class = function(char){
@@ -62,4 +53,4 @@ helper.class = function(char){
   }
 
   return char;
-}
+};
