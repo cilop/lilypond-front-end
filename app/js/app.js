@@ -11,6 +11,18 @@ angular.module('app', ['leftBar'])
     helper.animateKey(key);
   };
 
+  $scope.leftBarModel = {
+    key: 0,
+    time: {
+      top: 4,
+      bottom: 4
+    },
+    staves: [
+      {
+        clef: 'treble'
+      }
+    ]
+  };
 
 })
 
@@ -52,17 +64,6 @@ angular.module('app', ['leftBar'])
       // });
       
     }
-  $scope.leftBarModel = {
-    key: 0,
-    time: {
-      top: 4,
-      bottom: 4
-    },
-    staves: [
-      {
-        clef: 'treble'
-      }
-    ]
   };
 
 })
