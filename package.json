@@ -8,7 +8,8 @@
     "title": "Lilypond GUI",
     "icon": "appicon.png",
     "width": "800",
-    "heigh": "800"
+    "heigh": "800",
+    "toolbar": "true"
   },
   "dependencies": {
     "nodewebkit": "^0.8.6-2"
