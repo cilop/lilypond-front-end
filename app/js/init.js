@@ -6,6 +6,7 @@
 // var path = require('path');
 require('nw.gui').Window.get().showDevTools();
 var fs = require('fs');
+// var lzadialog = require('./lzadialog.js');
 // alert(path.dirname(process.execPath))
 // console.log(process)
 // console.log(process.cwd())
@@ -14,7 +15,42 @@ var fs = require('fs');
 
 $(function(){
 
-  $('#clickable').on('click', function(){
+  $('#saveFile').on('click', function(){
+    
+    var dummyData = {
+      data: false,
+      music: true,
+      nested: {
+        moreData: true,
+        name: "GUI"
+      }
+    };
+
+    LZADialog.saveFileAs(function(file){
+      console.log(file.name)
+      console.log(file.path);
+
+      var path = file.path;
+      var filename = file.name;
+      var dir = path.replace(filename,'');
+
+      fs.readdir(dir, function(err, files){
+        if (err) {
+          alert(err);
+        } else {
+          console.log(files);
+        }
+      });
+      
+    });
+  });
+
+  $('#fileSave').on('click', function(){
+    var dir = $('#fileSave').get(0);
+    console.log(dir);
+  })
+
+  $('#loadFile').on('click', function(){
     $('#fileUpload').click();
   });
 
@@ -37,8 +73,7 @@ $(function(){
       catch (err) {
         alert('File is unreadable, make sure you selected the correct JSON file');
       }
-    };
-    
+    }; 
   });
 
 
