@@ -3,8 +3,11 @@
 // var path = require('path');
 // console.log('---')
 // var path = process.cwd() + '/';
-
-// require('nw.gui').Window.get().showDevTools();
+var path = require('path');
+require('nw.gui').Window.get().showDevTools();
+// alert(path.dirname(process.execPath))
+console.log(process)
+console.log(process.cwd())
 
 $(function(){
 
@@ -15,8 +18,18 @@ $(function(){
   $('#fileUpload').on('change',function(event){
 
     console.log($('#fileUpload').get(0).files[0])
-    var filename = $('#fileUpload').get(0).files[0].name;
-    console.log(filename);
+    var file = $('#fileUpload').get(0).files[0];
+
+    var data = new FileReader();
+    data.onloadend = function() {
+      console.log('done loading');
+      console.log(data.result);
+    };
+    var result = data.readAsText(file);
+
+    console.log(result);
+    console.log(file);
+
     var dummyData = {
       key: 'pair',
       key2: 'pair2',
