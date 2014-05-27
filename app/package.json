@@ -1,6 +1,6 @@
 {
   "name": "lilypondgui",
-  "main": "views/index.html",
+  "main": "views/bootstrap.html",
   "version": "0.0.1",
   "single-instance": true,
   "window": {

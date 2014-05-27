@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  
-  "dependencies": {},
+  "dependencies": {
+    "nodewebkit": "^0.8.6-2"
+  },
   "devDependencies": {
     "matchdep": "~0.1.2",
     "grunt": "~0.4.1",
