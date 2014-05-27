@@ -6,7 +6,7 @@
   "keywords": [],
   "window": {
     "title": "Lilypond GUI",
-    "icon": "appicon.png",
+    "icon": "./appicon.png",
     "width": "800",
     "heigh": "800",
     "toolbar": "true"

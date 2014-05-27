@@ -8,15 +8,6 @@ $(function(){
 
   $('#saveFile').on('click', function(){
     
-    var dummyData = {
-      data: false,
-      music: true,
-      nested: {
-        moreData: true,
-        name: "GUI"
-      }
-    };
-
     LZADialog.saveFileAs(function(file){
 
       var path = file.path;
@@ -40,7 +31,7 @@ $(function(){
         if (err) {
           alert(err);
         } else {
-        alert('Save file in: ' + dir + filename);
+          alert('Save file in: ' + dir + filename);
         }
       });
 
