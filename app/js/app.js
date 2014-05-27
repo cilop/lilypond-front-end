@@ -1,4 +1,14 @@
 "use strict";
+
+// var gui = require('nw.gui');
+//   var win = gui.Window.get();
+//   var menubar = new gui.Menu({ type: 'menubar' });
+//   var file = new gui.Menu();
+//   var help = new gui.Menu();
+//   win.menu = menubar;
+//   win.menu.insert(new gui.MenuItem({ label: 'File', submenu: file}), 1);
+//   win.menu.append(new gui.MenuItem({ label: 'Help', submenu: help}));
+
 angular.module('app',[])
 
 .controller('mainCtrl', function($scope, $compile){
@@ -31,7 +41,7 @@ angular.module('app',[])
       $element.keydown(function(event){
         var key = helper.animateKey(event.which);
         if (key === 'z') {
-          var el = $compile('<div ng-model="staff" ng-staff tabindex="0"></div>')($scope);
+          var el = $compile('<div ng-model="staff" ng-track tabindex="0"></div>')($scope);
           $element.parent().append(el);
         }
       });
