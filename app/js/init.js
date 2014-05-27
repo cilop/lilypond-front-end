@@ -27,21 +27,32 @@ $(function(){
     };
 
     LZADialog.saveFileAs(function(file){
-      console.log(file.name)
-      console.log(file.path);
 
       var path = file.path;
       var filename = file.name;
       var dir = path.replace(filename,'');
 
-      fs.readdir(dir, function(err, files){
+      if (!(filename.match('.json'))) {
+        filename = filename + '.json';
+      }
+
+      var dummyData = {
+        music: 'on',
+        volume: true,
+        array: [1,2,3],
+        nested: {
+          hello: 'world'
+        }
+      };
+
+      fs.writeFile(dir + filename, JSON.stringify(dummyData), function(err){
         if (err) {
           alert(err);
         } else {
-          console.log(files);
+        alert('Save file in: ' + dir + filename);
         }
       });
-      
+
     });
   });
 
