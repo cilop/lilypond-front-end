@@ -1,6 +1,5 @@
 "use strict";
-angular.module('app',[])
-angular.module('app', ['leftBar'])
+angular.module('app', ['leftBar', 'documentView'])
 
 .controller('mainCtrl', function($scope, $compile){
 
@@ -23,6 +22,8 @@ angular.module('app', ['leftBar'])
       }
     ]
   };
+
+  $scope.documentModel = {};
 
 })
 
