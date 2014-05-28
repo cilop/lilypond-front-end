@@ -7,32 +7,6 @@
   fs = require('fs');
 
   $(function() {
-    $('#saveFile').on('click', function() {
-      return LZADialog.saveFileAs(function(file) {
-        var dir, dummyData, filename, path;
-        path = file.path;
-        filename = file.name;
-        dir = path.replace(filename, '');
-        if (!filename.match('.json')) {
-          filename = filename + '.json';
-        }
-        dummyData = {
-          music: true,
-          volume: true,
-          array: [1, 2, 3],
-          nested: {
-            hello: 'world'
-          }
-        };
-        return fs.writeFile(dir + filename, JSON.stringify(dummyData), function(err) {
-          if (err) {
-            return alert(err);
-          } else {
-            return alert('Save file in: ' + dir + filename);
-          }
-        });
-      });
-    });
     return $('#loadFile').on('click', function() {
       return LZADialog.selectFile({}, function(file) {
         var data, dir, filename, path;

@@ -1,3 +1,5 @@
+fs = require('fs')
+
 angular.module('app', ['leftBar','documentView'])
 
 .controller('mainCtrl', ($scope, dataFactory) ->
@@ -100,6 +102,26 @@ angular.module('app', ['leftBar','documentView'])
   data
   
   )
+
+.controller('IOCtrl', (dataFactory) ->
+  $('#saveFile').on('click', ->
+    LZADialog.saveFileAs((file) ->
+      path = file.path
+      filename = file.name
+      dir = path.replace(filename,'')
+      if not filename.match('.json') then filename = filename + '.json'
+
+      fs.writeFile(dir + filename, JSON.stringify(dataFactory), (err) ->
+        if err
+          alert err
+        else
+          alert 'Saved file in: ' + dir + filename
+        )
+      )
+    )
+  )
+
+
 
 
 
