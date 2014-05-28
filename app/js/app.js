@@ -1,4 +1,5 @@
 "use strict";
+require('nw.gui').Window.get().showDevTools();
 angular.module('app', ['leftBar', 'documentView'])
 
 .controller('mainCtrl', function($scope, $compile){
