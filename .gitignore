@@ -4,6 +4,7 @@ node_modules
 resources
 tmp
 app/bower_components
+app/js/*.map
 
 *~
 \#*#

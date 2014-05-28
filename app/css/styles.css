@@ -7,8 +7,9 @@
 }
 
 .panel.panel-default {
-  float: right;
-  width: 89%;
+  float: left;
+  width: 80%;
+  height: 198px;
 }
 
 .btn-group-vertical {
@@ -30,6 +31,8 @@ svg.staff {
 .left-bar {
   float: left;
   background-color: #E5E5E5;
+  width: 20%;
+  max-width: 130px;
 }
 
 .panel.panel-default.shortcuts {
