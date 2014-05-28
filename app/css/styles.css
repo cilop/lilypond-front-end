@@ -9,6 +9,7 @@
 .panel.panel-default {
   float: left;
   width: 80%;
+  height: 198px;
 }
 
 .btn-group-vertical {
