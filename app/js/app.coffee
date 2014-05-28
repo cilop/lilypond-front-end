@@ -15,8 +15,8 @@ angular.module('app', ['leftBar','documentView'])
       d: timeSig.bottom
       key: key
 
-    console.log('New meta is: ')
-    console.log(dataFactory.meta)
+    # console.log('New meta is: ')
+    # console.log(dataFactory.meta)
     )
 
   $scope.click = (event) ->
@@ -117,8 +117,12 @@ angular.module('app', ['leftBar','documentView'])
 
       data.onloadend = ->
         try
+          console.log(dataFactory)
           fileContents = JSON.parse(data.result)
-          alert 'Read file OK'
+          # alert 'Read file OK'
+          dataFactory = fileContents
+          alert 'Load file OK'
+          console.log(dataFactory)
         catch e
           alert 'Unreadable file: ' + e
         

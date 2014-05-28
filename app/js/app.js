@@ -11,13 +11,11 @@
       var key, timeSig;
       timeSig = value.targetScope.ngModel.time;
       key = value.targetScope.ngModel.key;
-      dataFactory.meta.measures[0].events.time = {
+      return dataFactory.meta.measures[0].events.time = {
         n: timeSig.top,
         d: timeSig.bottom,
         key: key
       };
-      console.log('New meta is: ');
-      return console.log(dataFactory.meta);
     });
     $scope.click = function(event) {
       var key;
@@ -119,8 +117,11 @@
         return data.onloadend = function() {
           var e, fileContents;
           try {
+            console.log(dataFactory);
             fileContents = JSON.parse(data.result);
-            return alert('Read file OK');
+            dataFactory = fileContents;
+            alert('Load file OK');
+            return console.log(dataFactory);
           } catch (_error) {
             e = _error;
             return alert('Unreadable file: ' + e);
