@@ -9,10 +9,8 @@ documentView.directive 'documentView', ->
     $scope.model =
       notes: [
         {pitch: 69, duration: {n: 1, d: 4}}
-        {pitch: 70, duration: {n: 1, d: 4}}
+        {pitch: 70, duration: {n: 1, d: 2}}
         {pitch: 71, duration: {n: 1, d: 4}}
-        {pitch: 72, duration: {n: 1, d: 4}}
-        {pitch: 73, duration: {n: 1, d: 4}}
       ]
   ]
   template: '<svg class="staff" width="480" height="60" viewBox="0 -4 64 8">

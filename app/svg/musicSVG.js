@@ -150,9 +150,9 @@
         return $element.attr({
           x: scope.direction === 'up' ? 1.2512 : 0,
           y: scope.direction === 'up' ? -3.5 : 0.1878,
-          width: 0.1300,
+          width: 0.13,
           height: 3.3122,
-          ry: 0.0400,
+          ry: 0.04,
           fill: 'currentColor'
         });
       }
@@ -209,6 +209,26 @@
     };
   });
 
+  musicSVG.directive('ngBarLine', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        type: '@',
+        position: '@'
+      },
+      link: function(scope, $element, $attrs) {
+        return $element.attr({
+          transform: "translate(" + (scope.position || 0) + ", 0)",
+          x: -0.19,
+          y: -2,
+          width: 0.19,
+          height: 4,
+          fill: 'currentColor'
+        });
+      }
+    };
+  });
+
   musicSVG.directive('ngMeasure', function() {
     return {
       restrict: 'A',
@@ -216,7 +236,14 @@
       scope: {
         ngModel: '='
       },
-      template: '<g ng-staff width="{{2 * ngModel.notes.length + 1}}"/> <g ng-positioned-note ng-repeat="note in ngModel.notes" position="{{-(note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/>'
+      controller: [
+        '$scope', function($scope) {
+          return $scope.width = function(model) {
+            return 2 * model.notes.length + 1;
+          };
+        }
+      ],
+      template: '<g ng-staff width="{{width(ngModel)}}"/> <g ng-positioned-note ng-repeat="note in ngModel.notes" position="{{-(note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/> <rect ng-bar-line type="|" position="{{width(ngModel)}}"/>'
     };
   });
 

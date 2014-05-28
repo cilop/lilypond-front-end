@@ -72,7 +72,7 @@ musicSVG.directive 'ngStem', ->
     $element.attr
       x: if scope.direction is 'up' then 1.2512 else 0
       y: if scope.direction is 'up' then -3.5 else 0.1878
-      width: 0.1300, height: 3.3122, ry: 0.0400, fill: 'currentColor'
+      width: 0.13, height: 3.3122, ry: 0.04, fill: 'currentColor'
 
 musicSVG.directive 'ngNote', ->
   restrict: 'A'
@@ -99,14 +99,29 @@ musicSVG.directive 'ngPositionedNote', ->
   link: (scope, $element, $attrs) ->
     $element.attr transform: "translate(#{scope.x or 0}, #{scope.y or 0})"
 
+musicSVG.directive 'ngBarLine', ->
+  restrict: 'A'
+  scope:
+    type: '@', position: '@'
+  link: (scope, $element, $attrs) ->
+    $element.attr
+      transform: "translate(#{scope.position or 0}, 0)"
+      x: -0.19, y: -2
+      width: 0.19, height: 4, fill: 'currentColor'
+
 musicSVG.directive 'ngMeasure', ->
   restrict: 'A'
   require: 'ngModel'
   scope: 
     ngModel: '='
-  template: '<g ng-staff width="{{2 * ngModel.notes.length + 1}}"/>
+  controller: ['$scope', ($scope) ->
+    $scope.width = (model) ->
+      2 * model.notes.length + 1
+  ]
+  template: '<g ng-staff width="{{width(ngModel)}}"/>
     <g ng-positioned-note ng-repeat="note in ngModel.notes"
-      position="{{-(note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/>'
+      position="{{-(note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/>
+    <rect ng-bar-line type="|" position="{{width(ngModel)}}"/>'
     
 
 svgNamespace = 'http://www.w3.org/2000/svg'
