@@ -90,5 +90,14 @@ musicSVG.directive 'ngNote', ->
   link: (scope, $element, $attrs) ->
     $element.attr transform: "translate(#{scope.x or 0}, #{scope.y or 0})"
 
+musicSVG.directive 'ngPositionedNote', ->
+  restrict: 'A'
+  scope:
+    type: '@', position: '@', x: '@', y: '@'
+  template: '<g ng-note type="{{type}}" y="{{position}}"
+    stem="{{position > 0 ? \'up\' : \'down\'}}"/>'
+  link: (scope, $element, $attrs) ->
+    $element.attr transform: "translate(#{scope.x or 0}, #{scope.y or 0})"
+
 
 svgNamespace = 'http://www.w3.org/2000/svg'

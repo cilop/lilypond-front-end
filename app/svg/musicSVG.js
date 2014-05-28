@@ -191,6 +191,24 @@
     };
   });
 
+  musicSVG.directive('ngPositionedNote', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        type: '@',
+        position: '@',
+        x: '@',
+        y: '@'
+      },
+      template: '<g ng-note type="{{type}}" y="{{position}}" stem="{{position > 0 ? \'up\' : \'down\'}}"/>',
+      link: function(scope, $element, $attrs) {
+        return $element.attr({
+          transform: "translate(" + (scope.x || 0) + ", " + (scope.y || 0) + ")"
+        });
+      }
+    };
+  });
+
   svgNamespace = 'http://www.w3.org/2000/svg';
 
 }).call(this);
