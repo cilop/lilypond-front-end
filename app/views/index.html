@@ -28,7 +28,7 @@
       </div>
       <div class="panel-body">
         <p>
-          Layer track here
+          {{ test }}
         </p>
       </div>
     </div>
@@ -56,7 +56,7 @@
             <div class="btn-group">
               <!-- <input type="file" id='fileUpload'></input> -->
             <button type='button' id='loadFile' class='btn btn-default btn-group-horizontal'>Load file</button>
-            <!-- <input type='file' id='fileSave'></input> -->
+            <input type='file' id='fileSave'></input>
             <button type='button' id='saveFile' class='btn btn-default btn-group-horizontal'>Save file</button>
             </div>
         </ul>
@@ -200,7 +200,7 @@
   </div>
 
   <div id='main'>
-    <div ng-track ng-keydown='key($event)' ng-model='staff' tabindex='0'>
+    <div ng-track tabindex='0'>
     </div>
   </div>
 

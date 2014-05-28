@@ -1,9 +1,37 @@
 "use strict";
 
-
-
+// - Fraction object (this one maybe not)
+// - staffEvent
+// - staffMeasure
+// - metaEvent
+// - metaMeasure
 
 window.helper = {};
+
+helper.fraction = function(n,d){
+  this.n = n;
+  this.d = d;
+};
+
+helper.staffEvent = function(clef){
+  this.clef = clef;
+};
+
+helper.staffMeasure = function(events, notes){
+  this.events = events;
+  this.notes = notes;
+};
+
+helper.metaEvent = function(key, time, barline) {
+  this.key = key;
+  this.time = time;
+  this.barline = barline;
+};
+
+helper.metaMeasure = function(events) {
+  this.events = events;
+};
+
 
 helper.animateKey = function(key){
   var key = helper.class(helper.keycode(key));
