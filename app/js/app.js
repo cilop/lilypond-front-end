@@ -7,12 +7,11 @@ angular.module('app', ['leftBar', 'documentView'])
 .controller('mainCtrl', function($scope, dataFactory){
 
   $scope.$on('leftChange', function(value){
-    console.log('appjs')
-    // console.log(dataFactory.meta.measures[0].events);
-    console.log(value.targetScope.ngModel);
-    // window.value = value;
+
     var timeSig = value.targetScope.ngModel.time;
     var key = value.targetScope.ngModel.key;
+
+    // todo: refactor hardcoded [0] to write info in current measure
     dataFactory.meta.measures[0].events.time = {
       n: timeSig.top,
       d: timeSig.bottom,

@@ -15,7 +15,6 @@
       link: function($scope) {
         console.log($scope.ngModel);
         return $scope.$watch('ngModel', function() {
-          console.log('emitting');
           return $scope.$emit('leftChange', $scope.ngModel);
         }, true);
       }

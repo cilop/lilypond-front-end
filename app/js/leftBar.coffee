@@ -21,8 +21,7 @@ leftBar.directive 'leftBar', ->
     </svg>'
   link: ($scope) ->
     console.log $scope.ngModel
-    $scope.$watch('ngModel', ->
-      console.log('emitting')
+    $scope.$watch('ngModel', ->  
       $scope.$emit('leftChange', $scope.ngModel)
     , true)
 
