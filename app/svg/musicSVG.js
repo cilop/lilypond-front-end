@@ -140,6 +140,57 @@
     };
   });
 
+  musicSVG.directive('ngStem', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        direction: '@'
+      },
+      link: function(scope, $element, $attrs) {
+        return $element.attr({
+          x: scope.direction === 'up' ? 1.2512 : 0,
+          y: scope.direction === 'up' ? -3.5 : 0.1878,
+          width: 0.1300,
+          height: 3.3122,
+          ry: 0.0400,
+          fill: 'currentColor'
+        });
+      }
+    };
+  });
+
+  musicSVG.directive('ngNote', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        type: '@',
+        stem: '@',
+        x: '@',
+        y: '@'
+      },
+      controller: [
+        '$scope', function($scope) {
+          return $scope.noteHeadName = function(type) {
+            switch (type) {
+              case '1':
+                return 'wholeNoteHead';
+              case '2':
+                return 'halfNoteHead';
+              default:
+                return 'solidNoteHead';
+            }
+          };
+        }
+      ],
+      template: '<path ng-path name="{{noteHeadName(type)}}"/> <rect ng-stem direction="{{stem}}" ng-hide="type == 1"/>',
+      link: function(scope, $element, $attrs) {
+        return $element.attr({
+          transform: "translate(" + (scope.x || 0) + ", " + (scope.y || 0) + ")"
+        });
+      }
+    };
+  });
+
   svgNamespace = 'http://www.w3.org/2000/svg';
 
 }).call(this);

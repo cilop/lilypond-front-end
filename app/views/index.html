@@ -13,13 +13,11 @@
     <script src='../bower_components/jquery/dist/jquery.js'></script>
     <script src='../bower_components/angular/angular.js'></script>
     <script src='../bower_components/underscore/underscore.js'></script>
-    <script src='../js/lzadialog.js'></script>
     <script src='../js/helper.js'></script>
     <script src='../svg/musicSVG.js'></script>
     <script src='../svg/paths.js'></script>
     <script src='../js/leftBar.js'></script>
     <script src='../js/documentView.js'></script>
-    <script src='../js/init.js'></script>
     <script src='../js/app.js'></script>
     <!-- <script src='../js/node-main.js'></script> -->
 
@@ -205,16 +203,10 @@
     </div>
   </div>
 
-  <div id='main'>
-    <div ng-track ng-keydown='key($event)' ng-model='staff' tabindex='0'>
-      <div class="document-view">
-        <div document-view ng-model="documentModel"></div>
-      </div>
-    </div>
-  </div>
+  <div document-view ng-model="documentModel"></div>
 
 <!--   <div class="panel panel-default">
-    <div class="panel-heading">
+       <div class="panel-heading">
       Staff 1 - Meta
     </div>
     <div class="panel-body">
