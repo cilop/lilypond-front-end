@@ -99,5 +99,14 @@ musicSVG.directive 'ngPositionedNote', ->
   link: (scope, $element, $attrs) ->
     $element.attr transform: "translate(#{scope.x or 0}, #{scope.y or 0})"
 
+musicSVG.directive 'ngMeasure', ->
+  restrict: 'A'
+  require: 'ngModel'
+  scope: 
+    ngModel: '='
+  template: '<g ng-staff width="{{2 * ngModel.notes.length + 1}}"/>
+    <g ng-positioned-note ng-repeat="note in ngModel.notes"
+      position="{{-(note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/>'
+    
 
 svgNamespace = 'http://www.w3.org/2000/svg'
