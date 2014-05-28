@@ -8,24 +8,14 @@
 
 window.helper = {};
 
-helper.fraction = function(n,d){
-  this.n = n;
-  this.d = d;
-};
-
-helper.staffEvent = function(clef){
-  this.clef = clef;
+helper.note = function(pitch, duration) {
+  this.pitch = pitch;
+  this.duration = duration;
 };
 
 helper.staffMeasure = function(events, notes){
   this.events = events;
   this.notes = notes;
-};
-
-helper.metaEvent = function(key, time, barline) {
-  this.key = key;
-  this.time = time;
-  this.barline = barline;
 };
 
 helper.metaMeasure = function(events) {

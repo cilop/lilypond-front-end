@@ -1,10 +1,27 @@
+
 "use strict";
 require('nw.gui').Window.get().showDevTools();
+var fs = require('fs');
 angular.module('app', ['leftBar', 'documentView'])
 
-.controller('mainCtrl', function($scope, $compile){
+.controller('mainCtrl', function($scope, dataFactory){
 
-  // var html = "<div ng-click='add()' id='layer'>layer<div id='meta'>meta</div><div id='staff'>staff<input><div>{{ note }}</div></div></div>";
+  $scope.$on('leftChange', function(value){
+    console.log('appjs')
+    // console.log(dataFactory.meta.measures[0].events);
+    console.log(value.targetScope.ngModel);
+    // window.value = value;
+    var timeSig = value.targetScope.ngModel.time;
+    var key = value.targetScope.ngModel.key;
+    dataFactory.meta.measures[0].events.time = {
+      n: timeSig.top,
+      d: timeSig.bottom,
+      key: key
+    };
+
+    console.log('New meta is: ');
+    console.log(dataFactory.meta);
+  });
 
   $scope.click = function(event){
     var key = event.target.className;
@@ -39,8 +56,6 @@ angular.module('app', ['leftBar', 'documentView'])
     templateUrl: 'staff.html',
     controller: function($scope, $element, $compile){
 
-      // $scope.test = 'hello world';
-
       $element.keydown(function(event){
         var key = helper.animateKey(event.which);
         if (key === 'z') {
@@ -59,6 +74,63 @@ angular.module('app', ['leftBar', 'documentView'])
       
     }
   };
+
+})
+
+.factory('dataFactory', function(){
+
+  var data = {};
+  var pitch;
+  var duration = {};
+  var clef;
+  var note = {
+    pitch: pitch,
+    duration: duration
+  };
+
+  var events = {
+    clef: clef
+  };
+
+  var notes = [note];
+  var measure = {
+    events: events,
+    notes: notes
+  };
+
+  var measures = [measure];
+
+  var staff = {
+    measures: measures
+  };
+
+  var staves = [staff];
+
+  data.staves = staves;
+  var barline;
+  var time;
+  var key;
+
+  events = {
+    key: key,
+    time: time,
+    barline: barline
+  };
+
+  measure = {
+    events: events
+  };
+
+  measures = [measure];
+
+  var meta = {
+    measures: measures
+  };
+
+  data.meta = meta;
+
+  return data;
+  // console.log(data);
 
 })
 
