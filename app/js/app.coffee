@@ -1,5 +1,7 @@
 fs = require('fs')
 
+require('nw.gui').Window.get().showDevTools()
+
 angular.module('app', ['leftBar','documentView'])
 
 .controller('mainCtrl', ($scope, dataFactory) ->
@@ -104,6 +106,26 @@ angular.module('app', ['leftBar','documentView'])
   )
 
 .controller('IOCtrl', (dataFactory) ->
+
+  $('#loadFile').on('click', ->
+    LZADialog.selectFile({}, (file) ->
+      path = file.path
+      filename = file.name
+      dir = path.replace(filename, '')
+      data = new FileReader()
+      data.readAsText(file)
+
+      data.onloadend = ->
+        try
+          fileContents = JSON.parse(data.result)
+          alert 'Read file OK'
+        catch e
+          alert 'Unreadable file: ' + e
+        
+      )
+    )
+
+
   $('#saveFile').on('click', ->
     LZADialog.saveFileAs((file) ->
       path = file.path

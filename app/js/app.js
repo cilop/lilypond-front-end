@@ -4,6 +4,8 @@
 
   fs = require('fs');
 
+  require('nw.gui').Window.get().showDevTools();
+
   angular.module('app', ['leftBar', 'documentView']).controller('mainCtrl', function($scope, dataFactory) {
     $scope.$on('leftChange', function(value) {
       var key, timeSig;
@@ -106,6 +108,26 @@
     data.meta = meta;
     return data;
   }).controller('IOCtrl', function(dataFactory) {
+    $('#loadFile').on('click', function() {
+      return LZADialog.selectFile({}, function(file) {
+        var data, dir, filename, path;
+        path = file.path;
+        filename = file.name;
+        dir = path.replace(filename, '');
+        data = new FileReader();
+        data.readAsText(file);
+        return data.onloadend = function() {
+          var e, fileContents;
+          try {
+            fileContents = JSON.parse(data.result);
+            return alert('Read file OK');
+          } catch (_error) {
+            e = _error;
+            return alert('Unreadable file: ' + e);
+          }
+        };
+      });
+    });
     return $('#saveFile').on('click', function() {
       return LZADialog.saveFileAs(function(file) {
         var dir, filename, path;
