@@ -58,5 +58,3 @@
   };
 
 }).call(this);
-
-//# sourceMappingURL=helper.map

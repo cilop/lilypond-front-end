@@ -102,5 +102,3 @@
   };
 
 }).call(this);
-
-//# sourceMappingURL=paths.map

@@ -271,5 +271,3 @@
   svgNamespace = 'http://www.w3.org/2000/svg';
 
 }).call(this);
-
-//# sourceMappingURL=musicSVG.map
