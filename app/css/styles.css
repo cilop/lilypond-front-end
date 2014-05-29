@@ -23,13 +23,27 @@ svg {
   /*viewBox:0 0 10 40;*/
 }
 
-svg.staff {
+svg.document.staff {
+    float: left;
     display: block;
 }
 
-.left-bar {
+svg.left-bar.staff {
+    display: block;
+    float: left;
+}
+
+div.left-bar {
   float: left;
   background-color: #E5E5E5;
+}
+
+div.document {
+    float: left;
+}
+
+div.staff {
+    float: left;
 }
 
 .panel.panel-default.shortcuts {

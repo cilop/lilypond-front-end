@@ -243,10 +243,19 @@
           };
         }
       ],
-      template: '<g ng-staff width="{{width(ngModel)}}"/> <g ng-positioned-note ng-repeat="note in ngModel.notes" position="{{-(note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/> <rect ng-bar-line type="|" position="{{width(ngModel)}}"/>'
+      template: '<g ng-staff width="{{width(ngModel)}}"/> <g ng-positioned-note ng-repeat="note in ngModel.notes" position="{{-(note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/> <rect ng-bar-line type="|" position="{{width(ngModel)}}"/>',
+      link: function(scope, $element, $attrs) {
+        $element.attr({
+          width: scope.width(scope.ngModel) * 8,
+          height: 64
+        });
+        return $element[0].setAttribute('viewBox', "0 -4 " + (scope.width(scope.ngModel)) + " 8");
+      }
     };
   });
 
   svgNamespace = 'http://www.w3.org/2000/svg';
 
 }).call(this);
+
+//# sourceMappingURL=musicSVG.map
