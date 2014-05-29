@@ -113,34 +113,26 @@ musicSVG.directive 'ngMeasure', ->
   restrict: 'A'
   require: 'ngModel'
   scope: 
-    ngModel: '='
-  controller: ['$scope', ($scope) ->
-    $scope.width = (model) ->
-      2 * model.notes.length + 1
-  ]
-  template: '<g ng-staff width="{{width(ngModel)}}"/>
+    ngModel: '=', size: '@'
+  template: '<g ng-staff width="{{size}}"/>
     <g ng-positioned-note ng-repeat="note in ngModel.notes"
-      position="{{-(note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/>
-    <rect ng-bar-line type="|" position="{{width(ngModel)}}"/>'
+      position="{{-1/2 * (note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/>
+    <rect ng-bar-line type="|" position="{{size}}"/>'
   link: (scope, $element, $attrs) ->
     $element.attr
-      width: scope.width(scope.ngModel) * 8, height: 64
-    $element[0].setAttribute 'viewBox', "0 -4 #{scope.width(scope.ngModel)} 8"
+      width: scope.size * 8, height: 64
+    $element[0].setAttribute 'viewBox', "0 -4 #{scope.size} 8"
 
 musicSVG.directive 'ngMetaMeasure', ->
   restrict: 'A'
   require: 'ngModel'
   scope: 
-    ngModel: '='
-  controller: ['$scope', ($scope) ->
-    $scope.width = (model) ->
-      2 * model.notes.length + 1
-  ]
-  template: '<line ng-line width="{{width(ngModel)}}"/>
-    <rect ng-bar-line type="|" size="1" position="{{width(ngModel)}}"/>'
+    ngModel: '=', size: '@'
+  template: '<line ng-line width="{{size}}"/>
+    <rect ng-bar-line type="|" size="1" position="{{size}}"/>'
   link: (scope, $element, $attrs) ->
     $element.attr
-      width: scope.width(scope.ngModel) * 8, height: 64
-    $element[0].setAttribute 'viewBox', "0 -4 #{scope.width(scope.ngModel)} 8"
+      width: scope.size * 8, height: 64
+    $element[0].setAttribute 'viewBox', "0 -4 #{scope.size} 8"
 
 svgNamespace = 'http://www.w3.org/2000/svg'

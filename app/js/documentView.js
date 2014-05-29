@@ -45,19 +45,19 @@
                   }, {
                     notes: [
                       {
-                        pitch: 69.5,
+                        pitch: 71,
                         duration: {
                           n: 1,
                           d: 2
                         }
                       }, {
-                        pitch: 70.5,
+                        pitch: 72,
                         duration: {
                           n: 1,
                           d: 4
                         }
                       }, {
-                        pitch: 71.5,
+                        pitch: 73,
                         duration: {
                           n: 1,
                           d: 4
@@ -69,12 +69,14 @@
               }
             ]
           };
-          return $scope.width = function(measure) {
-            return 2 * measure.notes.length + 1;
+          return $scope.width = function(measureIndex) {
+            return _.max(_($scope.model.staves).map(function(staff) {
+              return 2 * staff.measures[measureIndex].notes.length + 1;
+            }));
           };
         }
       ],
-      template: '<div class="staff"> <svg ng-meta-measure ng-repeat="measure in model.staves[0].measures" ng-model="measure" class="document staff"/> </div> <br> <div class="staff"> <svg ng-measure ng-repeat="measure in model.staves[0].measures" ng-model="measure" class="document staff"/> </div>'
+      template: '<div class="staff"> <svg ng-meta-measure ng-repeat="measure in model.meta.measures" ng-model="measure" size="{{width($index)}}" class="document staff"/> </div> <br> <div class="staff"> <svg ng-measure ng-repeat="measure in model.staves[0].measures" ng-model="measure" size="{{width($index)}}" class="document staff"/> </div>'
     };
   });
 

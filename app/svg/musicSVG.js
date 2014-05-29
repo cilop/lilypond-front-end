@@ -235,22 +235,16 @@
       restrict: 'A',
       require: 'ngModel',
       scope: {
-        ngModel: '='
+        ngModel: '=',
+        size: '@'
       },
-      controller: [
-        '$scope', function($scope) {
-          return $scope.width = function(model) {
-            return 2 * model.notes.length + 1;
-          };
-        }
-      ],
-      template: '<g ng-staff width="{{width(ngModel)}}"/> <g ng-positioned-note ng-repeat="note in ngModel.notes" position="{{-(note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/> <rect ng-bar-line type="|" position="{{width(ngModel)}}"/>',
+      template: '<g ng-staff width="{{size}}"/> <g ng-positioned-note ng-repeat="note in ngModel.notes" position="{{-1/2 * (note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/> <rect ng-bar-line type="|" position="{{size}}"/>',
       link: function(scope, $element, $attrs) {
         $element.attr({
-          width: scope.width(scope.ngModel) * 8,
+          width: scope.size * 8,
           height: 64
         });
-        return $element[0].setAttribute('viewBox', "0 -4 " + (scope.width(scope.ngModel)) + " 8");
+        return $element[0].setAttribute('viewBox', "0 -4 " + scope.size + " 8");
       }
     };
   });
@@ -260,22 +254,16 @@
       restrict: 'A',
       require: 'ngModel',
       scope: {
-        ngModel: '='
+        ngModel: '=',
+        size: '@'
       },
-      controller: [
-        '$scope', function($scope) {
-          return $scope.width = function(model) {
-            return 2 * model.notes.length + 1;
-          };
-        }
-      ],
-      template: '<line ng-line width="{{width(ngModel)}}"/> <rect ng-bar-line type="|" size="1" position="{{width(ngModel)}}"/>',
+      template: '<line ng-line width="{{size}}"/> <rect ng-bar-line type="|" size="1" position="{{size}}"/>',
       link: function(scope, $element, $attrs) {
         $element.attr({
-          width: scope.width(scope.ngModel) * 8,
+          width: scope.size * 8,
           height: 64
         });
-        return $element[0].setAttribute('viewBox', "0 -4 " + (scope.width(scope.ngModel)) + " 8");
+        return $element[0].setAttribute('viewBox', "0 -4 " + scope.size + " 8");
       }
     };
   });
