@@ -25,6 +25,13 @@ module.exports = function (grunt) {
             '<%= config.tmp %>/*'
           ]
         }]
+      },
+      coffee: {
+        files: {
+          src: [
+            '<%= config.app %>/js/**/*.js'
+          ]
+        }
       }
     },
     jshint: {
@@ -32,6 +39,16 @@ module.exports = function (grunt) {
         jshintrc: '.jshintrc'
       },
       files: '<%= config.app %>/js/*.js'
+    },
+    coffee: {
+      glob_to_multiple: {
+        expand: true,
+        flatten: false,
+        cwd: '<%= config.app %>/coffee/',
+        src: ['**/*.coffee'],
+        dest: '<%= config.app %>/js/',
+        ext: '.js'
+      }
     },
     copy: {
       appLinux: {
@@ -155,7 +172,7 @@ module.exports = function (grunt) {
     var concat = require('concat-files');
     concat([
       'tmp/nw.exe',
-      'tmp/app.nw',
+      'tmp/app.nw'
     ], 'tmp/lilypondGUI.exe', function () {
       var fs = require('fs');
       fs.unlink('tmp/app.nw', function (error, stdout, stderr) {
@@ -218,6 +235,8 @@ module.exports = function (grunt) {
   grunt.registerTask('dist-linux', [
     'jshint',
     'clean:dist',
+    'clean:coffee',
+    'coffee',
     'copy:appLinux',
     'createLinuxApp'
   ]);
@@ -225,6 +244,8 @@ module.exports = function (grunt) {
   grunt.registerTask('dist-win', [
     'jshint',
     'clean:dist',
+    'clean:coffee',
+    'coffee',
     'copy:copyWinToTmp',
     'compress:appToTmp',
     'rename:zipToApp',
@@ -235,6 +256,8 @@ module.exports = function (grunt) {
   grunt.registerTask('dist-mac', [
     // 'jshint',
     'clean:dist',
+    'clean:coffee',
+    'coffee',
     'copy:webkit',
     'copy:appMacos',
     'rename:app',
