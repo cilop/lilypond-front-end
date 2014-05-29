@@ -140,6 +140,136 @@
     };
   });
 
+  musicSVG.directive('ngStem', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        direction: '@'
+      },
+      link: function(scope, $element, $attrs) {
+        return $element.attr({
+          x: scope.direction === 'up' ? 1.2512 : 0,
+          y: scope.direction === 'up' ? -3.5 : 0.1878,
+          width: 0.13,
+          height: 3.3122,
+          ry: 0.04,
+          fill: 'currentColor'
+        });
+      }
+    };
+  });
+
+  musicSVG.directive('ngNote', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        type: '@',
+        stem: '@',
+        x: '@',
+        y: '@'
+      },
+      controller: [
+        '$scope', function($scope) {
+          return $scope.noteHeadName = function(type) {
+            switch (type) {
+              case '1':
+                return 'wholeNoteHead';
+              case '2':
+                return 'halfNoteHead';
+              default:
+                return 'solidNoteHead';
+            }
+          };
+        }
+      ],
+      template: '<path ng-path name="{{noteHeadName(type)}}"/> <rect ng-stem direction="{{stem}}" ng-hide="type == 1"/>',
+      link: function(scope, $element, $attrs) {
+        return $element.attr({
+          transform: "translate(" + (scope.x || 0) + ", " + (scope.y || 0) + ")"
+        });
+      }
+    };
+  });
+
+  musicSVG.directive('ngPositionedNote', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        type: '@',
+        position: '@',
+        x: '@',
+        y: '@'
+      },
+      template: '<g ng-note type="{{type}}" y="{{position}}" stem="{{position > 0 ? \'up\' : \'down\'}}"/>',
+      link: function(scope, $element, $attrs) {
+        return $element.attr({
+          transform: "translate(" + (scope.x || 0) + ", " + (scope.y || 0) + ")"
+        });
+      }
+    };
+  });
+
+  musicSVG.directive('ngBarLine', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        type: '@',
+        position: '@',
+        size: '@'
+      },
+      link: function(scope, $element, $attrs) {
+        return $element.attr({
+          transform: "translate(" + (scope.position || 0) + ", 0)",
+          x: -0.19,
+          y: -(scope.size || 2),
+          width: 0.19,
+          height: 2 * (scope.size || 2),
+          fill: 'currentColor'
+        });
+      }
+    };
+  });
+
+  musicSVG.directive('ngMeasure', function() {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      scope: {
+        ngModel: '=',
+        size: '@'
+      },
+      template: '<g ng-staff width="{{size}}"/> <g ng-positioned-note ng-repeat="note in ngModel.notes" position="{{-1/2 * (note.pitch - 71)}}" type="{{note.duration.d}}" x="{{2 * $index + 1}}"/> <rect ng-bar-line type="|" position="{{size}}"/>',
+      link: function(scope, $element, $attrs) {
+        $element.attr({
+          width: scope.size * 8,
+          height: 64
+        });
+        return $element[0].setAttribute('viewBox', "0 -4 " + scope.size + " 8");
+      }
+    };
+  });
+
+  musicSVG.directive('ngMetaMeasure', function() {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      scope: {
+        ngModel: '=',
+        size: '@'
+      },
+      template: '<line ng-line width="{{size}}"/> <rect ng-bar-line type="|" size="1" position="{{size}}"/>',
+      link: function(scope, $element, $attrs) {
+        $element.attr({
+          width: scope.size * 8,
+          height: 64
+        });
+        return $element[0].setAttribute('viewBox', "0 -4 " + scope.size + " 8");
+      }
+    };
+  });
+
   svgNamespace = 'http://www.w3.org/2000/svg';
 
 }).call(this);
+
+//# sourceMappingURL=musicSVG.map
