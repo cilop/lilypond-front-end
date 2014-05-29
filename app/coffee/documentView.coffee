@@ -6,6 +6,7 @@ documentView.directive 'documentView', ->
   scope: 
     ngModel: '='
   controller: ['$scope', ($scope) ->
+    $scope.test = ''
     $scope.model =
       meta:
         measures: [{},{}]
@@ -20,6 +21,11 @@ documentView.directive 'documentView', ->
             {pitch: 71, duration: {n: 1, d: 2}}
             {pitch: 72, duration: {n: 1, d: 4}}
             {pitch: 73, duration: {n: 1, d: 4}}
+          ]}
+          {notes: [
+            {pitch: 69, duration: {n: 1, d: 4}}
+            {pitch: 70, duration: {n: 1, d: 2}}
+            {pitch: 71, duration: {n: 1, d: 4}}
           ]}
         ]
       ]
@@ -36,4 +42,11 @@ documentView.directive 'documentView', ->
     <div class="staff">
       <svg ng-measure ng-repeat="measure in model.staves[0].measures"
         ng-model="measure" size="{{width($index)}}" class="document staff"/>
-    </div>'
+    </div>
+    <input class="staffInput" type="text" ng-model="model.test">'
+  link: ($scope) ->
+    window.data = $scope.model
+    console.log($scope.model)
+    $scope.$watch('model', ->
+      console.log('model changed')
+    , true)

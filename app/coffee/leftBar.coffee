@@ -21,8 +21,8 @@ leftBar.directive 'leftBar', ->
         top="{{ngModel.time.top}}" bottom="{{ngModel.time.bottom}}" x="12"/>
     </svg>'
   link: ($scope) ->
-    console.log $scope.ngModel
-    $scope.$watch('ngModel', ->  
+    
+    $scope.$watch('ngModel', ->
       $scope.$emit('leftChange', $scope.ngModel)
     , true)
 

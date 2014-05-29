@@ -1,3 +1,13 @@
+#document {
+  position: relative;
+}
+
+.staffInput {
+  position: absolute;
+  left: 20%;
+  top: 62%;
+}
+
 #fileUpload, #fileSave {
   visibility: hidden;
 }
