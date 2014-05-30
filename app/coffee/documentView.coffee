@@ -5,7 +5,7 @@ documentView.directive 'documentView', ->
   require: 'ngModel'
   scope: 
     ngModel: '='
-  controller: ['$scope', ($scope) ->
+  controller: ['$scope', '$element', ($scope, $element) ->
     $scope.test = ''
     $scope.model =
       meta:
@@ -29,6 +29,15 @@ documentView.directive 'documentView', ->
           ]}
         ]
       ]
+    $element.keydown((event) ->
+      key = helper.animateKey(event.which)
+      if key is 'z'
+        el = $compile('<div ng-track tabindex="0"></div>')($scope)
+        $element.parent().append(el)
+      else
+        console.log(key)
+        # $scope.test += key
+      )
     $scope.width = (measureIndex) ->
       _.max _($scope.model.staves).map (staff) ->
         2 * staff.measures[measureIndex].notes.length + 1
