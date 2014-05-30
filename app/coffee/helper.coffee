@@ -1,5 +1,22 @@
 window.helper = {}
 
+helper.getDuration = (str) ->
+
+  try
+    notes = str.split(',')
+  catch e
+    return 0
+  
+  duration = 0
+
+  if notes.length is 1 then return 0
+
+  for note in notes
+    check = helper.checkNoteString(note)
+    if check[0] then duration += check[1]
+
+  duration
+
 helper.noteString = (num) ->
   "[Note #{num} ready!] "
 
@@ -11,11 +28,11 @@ helper.checkNoteString = (str) ->
     n = dur.split('/')[0]
     d = dur.split('/')[1]
 
-    if parseInt(pitch) and parseInt(n) and parseInt(d) then return true
-    else return false
+    if parseInt(pitch) and parseInt(n) and parseInt(d) then return [true, parseInt(n) / parseInt(d)]
+    else return [false]
 
   catch e
-    return false
+    return [false]
   
 
 helper.parseIncomplete = (str) ->
@@ -30,7 +47,7 @@ helper.parseIncomplete = (str) ->
   if splitted.length is 1 then return 'rendering note ..'
 
   for num in [0...splitted.length]
-    if helper.checkNoteString(splitted[num]) then phrase += helper.noteString(num)
+    if helper.checkNoteString(splitted[num])[0] then phrase += helper.noteString(num)
     else phrase += 'rendering note ..'
     
   phrase

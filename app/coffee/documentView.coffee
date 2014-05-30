@@ -19,25 +19,33 @@ documentView.directive 'documentView', ->
       # console.log(key)
 
       $scope.model.typing = helper.parseIncomplete($scope.model.input)
+      console.log($scope.model.currentDuration)
 
-      if key is 'z'
+      if key is 'enter'
+
+        $scope.model.currentDuration = helper.getDuration($scope.model.input)
+        if $scope.model.currentDuration <= 1
         
+          console.log('parsing notes')
+          notes = helper.parseNotes($scope.model.input)
+          
+          $scope.model.meta.measures.push({})
+          $scope.model.staves[0].measures.push({ notes: notes })
+          staffEl = $compile('<svg ng-measure ng-model="measure"  class="document staff"/>')($scope)
+          metaEl = $compile('<svg ng-meta-measure ng-model="measure"  class="document staff"/>')($scope)
+          $('.staff.top').append(metaEl)
+          $('.staff.bottom').append(staffEl)
+          $scope.model.input = ''
+          $scope.model.typing = 'rendering note ..'
 
-      else if key is 'enter'
-        console.log('parsing notes')
-        notes = helper.parseNotes($scope.model.input)
-        
-        $scope.model.meta.measures.push({})
-        $scope.model.staves[0].measures.push({ notes: notes })
-        staffEl = $compile('<svg ng-measure ng-model="measure"  class="document staff"/>')($scope)
-        metaEl = $compile('<svg ng-meta-measure ng-model="measure"  class="document staff"/>')($scope)
-        $('.staff.top').append(metaEl)
-        $('.staff.bottom').append(staffEl)
-        $scope.model.input = ''
-        $scope.model.typing = 'rendering note ..'
+        else 
 
-      else
-        console.log(key)
+          alert 'Combination of notes exceeds allowed duration'
+
+
+
+      # else
+        # console.log(key)
         # $scope.test += key
       )
     $scope.width = (measureIndex) ->
