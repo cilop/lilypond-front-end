@@ -5,6 +5,7 @@ helper.note = (pitch, num, den)->
   this.duration = 
     n: num
     d: den
+  this
 
 helper.staffMeasure = (events, notes)->
   this.events = events
