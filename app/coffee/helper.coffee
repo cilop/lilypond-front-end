@@ -17,7 +17,7 @@ helper.animateKey = (key)->
   element.toggleClass('dark')
   setTimeout(->
     element.toggleClass('dark')
-  ,50)
+  ,100)
   key
 
 helper.events = (key)->

@@ -5,7 +5,7 @@ documentView.directive 'documentView', ->
   require: 'ngModel'
   scope: 
     ngModel: '='
-  controller: ['$scope', '$element', ($scope, $element) ->
+  controller: ['$scope', '$element', '$compile', ($scope, $element, $compile) ->
     $scope.test = ''
     $scope.model =
       meta:
@@ -32,8 +32,14 @@ documentView.directive 'documentView', ->
     $element.keydown((event) ->
       key = helper.animateKey(event.which)
       if key is 'z'
-        el = $compile('<div ng-track tabindex="0"></div>')($scope)
-        $element.parent().append(el)
+        console.log($scope.model)
+        $scope.model.meta.measures.push({})
+        el = $compile('<svg ng-meta-measure ng-model="measure" size="{{width($index)}}" class="document staff"/>')($scope)
+        # el = $compile('<div ng-track tabindex="0"></div>')($scope)
+        # $element.parent().append(el)
+        console.log 'el'
+        console.log(el)
+        $('.staff.top').append(el)
       else
         console.log(key)
         # $scope.test += key
@@ -43,7 +49,7 @@ documentView.directive 'documentView', ->
         2 * staff.measures[measureIndex].notes.length + 1
   ]
   template:
-    '<div class="staff">
+    '<div class="staff top">
       <svg ng-meta-measure ng-repeat="measure in model.meta.measures"
         ng-model="measure" size="{{width($index)}}" class="document staff"/>
     </div>
@@ -51,8 +57,8 @@ documentView.directive 'documentView', ->
     <div class="staff">
       <svg ng-measure ng-repeat="measure in model.staves[0].measures"
         ng-model="measure" size="{{width($index)}}" class="document staff"/>
-    </div>
-    <input class="staffInput" type="text" ng-model="model.test">'
+    </div>'
+    # <input class="staffInput" type="text" ng-model="model.test">
   link: ($scope) ->
     window.data = $scope.model
     console.log($scope.model)
