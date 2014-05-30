@@ -1,5 +1,37 @@
 window.helper = {}
 
+helper.parseNotes = (noteString) ->
+  splitted = noteString.split(',')
+  notes = []
+
+  # Lots of room for improvement, but readable for now:
+  for note in splitted
+    pitch = note.split(' ')[0]
+    n = note.split(' ')[1].split('/')[0]
+    d = note.split(' ')[1].split('/')[1]
+    notes.push(new helper.note(pitch,n,d))
+
+  notes
+
+
+helper.addDuration = (duration) ->
+  parseInt(duration.n) + parseInt(duration.d)
+
+# helper.insertNote = (measure, addNote)->
+#   notesArray = measure.notes
+#   duration = 0
+
+#   for note in notesArray
+#     duration += helper.addDuration(note.duration)
+
+#   duration += helper.addDuration(addNote.duration)
+
+#   if duration > 1
+#     return false
+#   else
+#     notesArray.push(addNote)
+#     return true
+
 helper.note = (pitch, num, den)->
   this.pitch = pitch
   this.duration = 
@@ -31,6 +63,7 @@ helper.keycode = (code)->
   else if code is 44 then return ','
   else if code is 46 then return '.'
   else if code is 47 then return '/'
+  else if code is 13 then return 'enter'
 
   'abcdefghijklmnopqrstuvwxyz'[code - 65]
 
