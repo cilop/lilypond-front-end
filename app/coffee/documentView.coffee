@@ -42,11 +42,6 @@ documentView.directive 'documentView', ->
 
           alert 'Combination of notes exceeds allowed duration'
 
-
-
-      # else
-        # console.log(key)
-        # $scope.test += key
       )
     $scope.width = (measureIndex) ->
       _.max _($scope.model.staves).map (staff) ->
@@ -66,8 +61,6 @@ documentView.directive 'documentView', ->
     <input class="staffInput pitch" type="text" ng-model="model.input">
     <p ng-model="model.typing" class="inputDisplay"> {{ model.typing }} </p>
     </div>'
-    # <p class="smallText"> New measure input: pitch n/d, ... </p>
-    # <input class="staffInput duration" type="text" ng-model="model.test">
   # link: ($scope) ->
   #   window.data = $scope.model
   #   console.log($scope.model)

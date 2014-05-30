@@ -24,9 +24,11 @@ helper.checkNoteString = (str) ->
   try
     splitted = str.split(' ')
     pitch = splitted[0]
-    dur = splitted[1]
-    n = dur.split('/')[0]
-    d = dur.split('/')[1]
+    duration = splitted[1]
+    numbers = duration.split('/')
+
+    n = numbers.split('/')[0]
+    d = numbers.split('/')[1]
 
     if parseInt(pitch) and parseInt(n) and parseInt(d) then return [true, parseInt(n) / parseInt(d)]
     else return [false]
@@ -57,11 +59,14 @@ helper.parseNotes = (noteString) ->
   splitted = noteString.split(',')
   notes = []
 
-  # Lots of room for improvement, but readable for now:
   for note in splitted
-    pitch = note.split(' ')[0]
-    n = note.split(' ')[1].split('/')[0]
-    d = note.split(' ')[1].split('/')[1]
+    splittedInside = note.split(' ')
+
+    pitch = splittedInside[0]
+    numbers = splittedInside[1].split('/')
+
+    n = numbers[0]
+    d = numbers[1]
     notes.push(new helper.note(pitch,n,d))
 
   notes
@@ -69,21 +74,6 @@ helper.parseNotes = (noteString) ->
 
 helper.addDuration = (duration) ->
   parseInt(duration.n) + parseInt(duration.d)
-
-# helper.insertNote = (measure, addNote)->
-#   notesArray = measure.notes
-#   duration = 0
-
-#   for note in notesArray
-#     duration += helper.addDuration(note.duration)
-
-#   duration += helper.addDuration(addNote.duration)
-
-#   if duration > 1
-#     return false
-#   else
-#     notesArray.push(addNote)
-#     return true
 
 helper.note = (pitch, num, den)->
   this.pitch = pitch

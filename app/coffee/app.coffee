@@ -14,9 +14,6 @@ angular.module('app', ['leftBar','documentView'])
       n: timeSig.top
       d: timeSig.bottom
       key: key
-
-    # console.log('New meta is: ')
-    # console.log(dataFactory.meta)
     )
 
   $scope.click = (event) ->
