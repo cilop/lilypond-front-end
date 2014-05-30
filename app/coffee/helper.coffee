@@ -1,8 +1,10 @@
 window.helper = {}
 
-helper.note = (pitch, duration)->
+helper.note = (pitch, num, den)->
   this.pitch = pitch
-  this.duration = duration
+  this.duration = 
+    n: num
+    d: den
 
 helper.staffMeasure = (events, notes)->
   this.events = events
