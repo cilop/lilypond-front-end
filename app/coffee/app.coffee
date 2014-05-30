@@ -35,25 +35,25 @@ angular.module('app', ['leftBar','documentView'])
   # $scope.documentModel = {}
   )
 
-.directive('ngTrack', ->
-  staffNum = 0
-  restrict: 'EA'
-  replace: true
-  scope: true
-  templateUrl: 'staff.html'
-  controller: ($scope, $element, $compile) ->
-    $element.keydown((event) ->
-      key = helper.animateKey(event.which)
-      if key is 'z'
-        el = $compile('<div ng-track tabindex="0"></div>')($scope)
-        $element.parent().append(el)
-      else
-        console.log(key)
-        $scope.test += key
-      )
-    link: (scope) ->
-      scope.test = ++staffNum
-  )
+# .directive('ngTrack', ->
+#   staffNum = 0
+#   restrict: 'EA'
+#   replace: true
+#   scope: true
+#   templateUrl: 'staff.html'
+#   controller: ($scope, $element, $compile) ->
+#     $element.keydown((event) ->
+#       key = helper.animateKey(event.which)
+#       if key is 'z'
+#         el = $compile('<div ng-track tabindex="0"></div>')($scope)
+#         $element.parent().append(el)
+#       else
+#         console.log(key)
+#         $scope.test += key
+#       )
+#     link: (scope) ->
+#       scope.test = ++staffNum
+#   )
 
 .factory('dataFactory', ->
   pitch = 52

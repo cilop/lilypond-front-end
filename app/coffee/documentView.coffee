@@ -8,15 +8,9 @@ documentView.directive 'documentView', ->
   controller: ['$scope', '$element', '$compile', ($scope, $element, $compile) ->
     $scope.model =
       meta:
-        measures: [{}]
+        measures: []
       staves: [
-        measures: [
-          {notes: [
-            {pitch: 69, duration: {n: 1, d: 4}}
-            {pitch: 70, duration: {n: 1, d: 2}}
-            {pitch: 71, duration: {n: 1, d: 4}}
-          ]}
-        ]
+        measures: []
       ]
     $scope.model.typing = 'rendering note ..'
     $element.keydown((event) ->
@@ -40,6 +34,7 @@ documentView.directive 'documentView', ->
         $('.staff.top').append(metaEl)
         $('.staff.bottom').append(staffEl)
         $scope.model.input = ''
+        $scope.model.typing = 'rendering note ..'
 
       else
         console.log(key)

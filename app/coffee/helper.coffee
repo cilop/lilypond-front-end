@@ -30,7 +30,7 @@ helper.parseIncomplete = (str) ->
   if splitted.length is 1 then return 'rendering note ..'
 
   for num in [0...splitted.length]
-    if splitted[num] then phrase += helper.noteString(num)
+    if helper.checkNoteString(splitted[num]) then phrase += helper.noteString(num)
     else phrase += 'rendering note ..'
     
   phrase
