@@ -1,5 +1,41 @@
 window.helper = {}
 
+helper.noteString = (num) ->
+  "[Note #{num} ready!] "
+
+helper.checkNoteString = (str) ->
+  try
+    splitted = str.split(' ')
+    pitch = splitted[0]
+    dur = splitted[1]
+    n = dur.split('/')[0]
+    d = dur.split('/')[1]
+
+    if parseInt(pitch) and parseInt(n) and parseInt(d) then return true
+    else return false
+
+  catch e
+    return false
+  
+
+helper.parseIncomplete = (str) ->
+  
+  try
+    splitted = str.split(',')
+  catch e
+    return 'rendering note ..'
+  
+  phrase = ''
+
+  if splitted.length is 1 then return 'rendering note ..'
+
+  for num in [0...splitted.length]
+    if splitted[num] then phrase += helper.noteString(num)
+    else phrase += 'rendering note ..'
+    
+  phrase
+
+
 helper.parseNotes = (noteString) ->
   splitted = noteString.split(',')
   notes = []

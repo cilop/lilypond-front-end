@@ -6,7 +6,6 @@ documentView.directive 'documentView', ->
   scope: 
     ngModel: '='
   controller: ['$scope', '$element', '$compile', ($scope, $element, $compile) ->
-    $scope.test = ''
     $scope.model =
       meta:
         measures: [{}]
@@ -19,10 +18,14 @@ documentView.directive 'documentView', ->
           ]}
         ]
       ]
+    $scope.model.typing = 'rendering note ..'
     $element.keydown((event) ->
       key = helper.animateKey(event.which)
       # console.log(event.which)
       # console.log(key)
+
+      $scope.model.typing = helper.parseIncomplete($scope.model.input)
+
       if key is 'z'
         
 
@@ -36,6 +39,7 @@ documentView.directive 'documentView', ->
         metaEl = $compile('<svg ng-meta-measure ng-model="measure"  class="document staff"/>')($scope)
         $('.staff.top').append(metaEl)
         $('.staff.bottom').append(staffEl)
+        $scope.model.input = ''
 
       else
         console.log(key)
@@ -55,7 +59,11 @@ documentView.directive 'documentView', ->
       <svg ng-measure ng-repeat="measure in model.staves[0].measures"
         ng-model="measure" size="{{width($index)}}" class="document staff"/>
     </div>
-    <input class="staffInput pitch" type="text" ng-model="model.input">'
+    <div class="displayContainer">
+    <input class="staffInput pitch" type="text" ng-model="model.input">
+    <p ng-model="model.typing" class="inputDisplay"> {{ model.typing }} </p>
+    </div>'
+    # <p class="smallText"> New measure input: pitch n/d, ... </p>
     # <input class="staffInput duration" type="text" ng-model="model.test">
   # link: ($scope) ->
   #   window.data = $scope.model

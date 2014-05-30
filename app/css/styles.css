@@ -5,9 +5,28 @@
 
 .staffInput {
   position: absolute;
-  left: 20%;
+  left: 0%;
   top: 62%;
 }
+
+.displayContainer {
+  position: absolute;
+  top: 62%;
+}
+
+.staffInput, .inputDisplay {
+  position: relative;
+  float: left;
+}
+
+.inputDisplay {
+  left: 10%;
+}
+/*.smallText {
+  font-size: 30%;
+  left: 20%;
+  top: 55%;
+}*/
 
 #fileUpload, #fileSave {
   visibility: hidden;
