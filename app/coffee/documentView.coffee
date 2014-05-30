@@ -61,9 +61,8 @@ documentView.directive 'documentView', ->
     <input class="staffInput pitch" type="text" ng-model="model.input">
     <p ng-model="model.typing" class="inputDisplay"> {{ model.typing }} </p>
     </div>'
-  # link: ($scope) ->
-  #   window.data = $scope.model
-  #   console.log($scope.model)
-  #   $scope.$watch('model', ->
-  #     console.log('model changed')
-  #   , true)
+  link: ($scope) ->
+    $scope.$watch('model', ->
+      console.log('model changed')
+      $scope.$emit('dataChanged', $scope.model)
+    , true)

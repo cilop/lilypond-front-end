@@ -6,6 +6,47 @@ angular.module('app', ['leftBar','documentView'])
 
 .controller('mainCtrl', ($scope, dataFactory) ->
 
+  $('#loadFile').on('click', ->
+    LZADialog.selectFile({}, (file) ->
+      path = file.path
+      filename = file.name
+      dir = path.replace(filename, '')
+      data = new FileReader()
+      data.readAsText(file)
+
+      data.onloadend = ->
+        try
+          console.log(dataFactory)
+          fileContents = JSON.parse(data.result)
+          # alert 'Read file OK'
+          dataFactory = fileContents
+          alert 'Load file OK'
+          console.log(dataFactory)
+        catch e
+          alert 'Unreadable file: ' + e
+        
+      )
+    )
+
+
+  $('#saveFile').on('click', ->
+    console.log 'Saving file'
+    console.log dataFactory
+    LZADialog.saveFileAs((file) ->
+      path = file.path
+      filename = file.name
+      dir = path.replace(filename,'')
+      if not filename.match('.json') then filename = filename + '.json'
+
+      fs.writeFile(dir + filename, JSON.stringify(dataFactory), (err) ->
+        if err
+          alert err
+        else
+          alert 'Saved file in: ' + dir + filename
+        )
+      )
+    )
+
   $scope.$on('leftChange', (value) ->
     timeSig = value.targetScope.ngModel.time
     key = value.targetScope.ngModel.key
@@ -14,6 +55,14 @@ angular.module('app', ['leftBar','documentView'])
       n: timeSig.top
       d: timeSig.bottom
       key: key
+    )
+
+  $scope.$on('dataChanged', (value) ->
+    console.log(value.targetScope.model)
+    console.log(dataFactory)
+    dataFactory = value.targetScope.model
+    console.log(dataFactory)
+    console.log 'Updated store'
     )
 
   $scope.click = (event) ->
@@ -104,44 +153,48 @@ angular.module('app', ['leftBar','documentView'])
 
 .controller('IOCtrl', (dataFactory) ->
 
-  $('#loadFile').on('click', ->
-    LZADialog.selectFile({}, (file) ->
-      path = file.path
-      filename = file.name
-      dir = path.replace(filename, '')
-      data = new FileReader()
-      data.readAsText(file)
+  # $('#loadFile').on('click', ->
+  #   LZADialog.selectFile({}, (file) ->
+  #     path = file.path
+  #     filename = file.name
+  #     dir = path.replace(filename, '')
+  #     data = new FileReader()
+  #     data.readAsText(file)
 
-      data.onloadend = ->
-        try
-          console.log(dataFactory)
-          fileContents = JSON.parse(data.result)
-          # alert 'Read file OK'
-          dataFactory = fileContents
-          alert 'Load file OK'
-          console.log(dataFactory)
-        catch e
-          alert 'Unreadable file: ' + e
+  #     data.onloadend = ->
+  #       try
+  #         console.log(dataFactory)
+  #         fileContents = JSON.parse(data.result)
+  #         # alert 'Read file OK'
+  #         dataFactory = fileContents
+  #         alert 'Load file OK'
+  #         console.log(dataFactory)
+  #       catch e
+  #         alert 'Unreadable file: ' + e
         
-      )
-    )
+  #     )
+  #   )
 
 
-  $('#saveFile').on('click', ->
-    LZADialog.saveFileAs((file) ->
-      path = file.path
-      filename = file.name
-      dir = path.replace(filename,'')
-      if not filename.match('.json') then filename = filename + '.json'
+  # $('#saveFile').on('click', ->
+  #   console.log 'Saving file'
+  #   console.log dataFactory
+  #   LZADialog.saveFileAs((file) ->
+  #     path = file.path
+  #     filename = file.name
+  #     dir = path.replace(filename,'')
+  #     if not filename.match('.json') then filename = filename + '.json'
 
-      fs.writeFile(dir + filename, JSON.stringify(dataFactory), (err) ->
-        if err
-          alert err
-        else
-          alert 'Saved file in: ' + dir + filename
-        )
-      )
-    )
+  #     fs.writeFile(dir + filename, JSON.stringify(dataFactory), (err) ->
+  #       if err
+  #         alert err
+  #       else
+  #         alert 'Saved file in: ' + dir + filename
+  #       )
+  #     )
+  #   )
+
+
   )
 
 
