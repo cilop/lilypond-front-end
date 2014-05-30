@@ -30,9 +30,11 @@ documentView.directive 'documentView', ->
         console.log($scope.model)
         $scope.model.meta.measures.push({})
         $scope.model.staves[0].measures.push({ notes: [new helper.note(69, 1, 4), new helper.note(70,1,2), new helper.note(71,1,4)] })
+        # size="{{width($index)}}"
+        # size="{{width($index)}}"
 
-        staffEl = $compile('<svg ng-measure ng-model="measure" size="{{width($index)}}" class="document staff"/>')($scope)
-        metaEl = $compile('<svg ng-meta-measure ng-model="measure" size="{{width($index)}}" class="document staff"/>')($scope)
+        staffEl = $compile('<svg ng-measure ng-model="measure"  class="document staff"/>')($scope)
+        metaEl = $compile('<svg ng-meta-measure ng-model="measure"  class="document staff"/>')($scope)
         # el = $compile('<div ng-track tabindex="0"></div>')($scope)
         # $element.parent().append(el)
         console.log 'metaEl'

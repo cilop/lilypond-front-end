@@ -1,5 +1,6 @@
-#document {
+.document {
   position: relative;
+  overflow: scroll;
 }
 
 .staffInput {
