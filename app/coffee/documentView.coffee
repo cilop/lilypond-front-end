@@ -13,6 +13,28 @@ documentView.directive 'documentView', ->
         measures: []
       ]
     $scope.model.typing = 'rendering note ..'
+
+    $scope.$on('leftChange', (currentScope, key, time) ->
+
+      # timeSig = value.time
+      # key = value.key
+
+      # console.log $scope
+      # console.log $scope.model.meta.measures
+
+      console.log $scope.model.meta.measures.length
+
+      if $scope.model.meta.measures.length > 0
+
+        console.log 'Left change'
+
+        $scope.model.meta.measures[0].events = $scope.model.meta.measures[0].events || {} 
+
+        $scope.model.meta.measures[0].events.key = key
+        $scope.model.meta.measures[0].events.time = time
+
+      )
+
     $element.keydown((event) ->
       key = helper.animateKey(event.which)
       # console.log(event.which)
@@ -25,7 +47,10 @@ documentView.directive 'documentView', ->
 
         $scope.$emit('dataChanged', $scope.model)
         $scope.model.currentDuration = helper.getDuration($scope.model.input)
-        if $scope.model.currentDuration <= 1
+
+        
+        console.log 'Current duration is ' + helper.getMetaDuration($scope.model)
+        if $scope.model.currentDuration <= 1 #helper.getMetaDuration($scope.model)
         
           console.log('parsing notes')
           notes = helper.parseNotes($scope.model.input)
@@ -62,8 +87,9 @@ documentView.directive 'documentView', ->
     <input class="staffInput pitch" type="text" ng-model="model.input">
     <p ng-model="model.typing" class="inputDisplay"> {{ model.typing }} </p>
     </div>'
-  # link: ($scope) ->
-  #   $scope.$watch('model', ->
-  #     console.log('model changed')
-  #     $scope.$emit('dataChanged', $scope.model)
-  #   , true)
+  link: ($scope) ->
+    window.data = $scope.model
+    # $scope.$watch('model', ->
+    #   console.log('model changed')
+    #   $scope.$emit('dataChanged', $scope.model)
+    # , true)

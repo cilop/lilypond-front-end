@@ -1,6 +1,6 @@
 leftBar = angular.module 'leftBar', ['musicSVG']
 
-leftBar.directive 'leftBar', ->
+leftBar.directive 'leftBar', ($rootScope) ->
   restrict: 'A'
   require: 'ngModel'
   scope: 
@@ -23,6 +23,8 @@ leftBar.directive 'leftBar', ->
   link: ($scope) ->
     
     $scope.$watch('ngModel', ->
-      $scope.$emit('leftChange', $scope.ngModel)
+      # $scope.$emit('leftChange', $scope.ngModel)
+      # console.log $scope.ngModel
+      $rootScope.$broadcast('leftChange', $scope.ngModel.key, $scope.ngModel.time)
     , true)
 

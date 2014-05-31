@@ -47,15 +47,16 @@ angular.module('app', ['leftBar','documentView'])
       )
     )
 
-  $scope.$on('leftChange', (value) ->
-    timeSig = value.targetScope.ngModel.time
-    key = value.targetScope.ngModel.key
-    # todo: remove hardcoded 0
-    dataFactory.meta.measures[0].events.time = 
-      n: timeSig.top
-      d: timeSig.bottom
-      key: key
-    )
+  # $scope.$on('leftChange', (value) ->
+  #   console.log 'App listened!'
+  #   timeSig = value.targetScope.ngModel.time
+  #   key = value.targetScope.ngModel.key
+  #   # todo: remove hardcoded 0
+  #   dataFactory.meta.measures[0].events.time = 
+  #     n: timeSig.top
+  #     d: timeSig.bottom
+  #     key: key
+  #   )
 
   $scope.$on('dataChanged', (value) ->
     console.log(value.targetScope.model)
