@@ -18,24 +18,24 @@ helper.getDuration = (str) ->
   duration
 
 helper.noteString = (num) ->
+  num++
   "[Note #{num} ready!] "
 
 helper.checkNoteString = (str) ->
+
   try
     splitted = str.split(' ')
     pitch = splitted[0]
     duration = splitted[1]
     numbers = duration.split('/')
-
-    n = numbers.split('/')[0]
-    d = numbers.split('/')[1]
-
-    if parseInt(pitch) and parseInt(n) and parseInt(d) then return [true, parseInt(n) / parseInt(d)]
-    else return [false]
-
   catch e
     return [false]
-  
+
+  n = numbers[0]
+  d = numbers[1]
+
+  if parseInt(pitch) and parseInt(n) and parseInt(d) then return [true, parseInt(n) / parseInt(d)]
+  else return [false]
 
 helper.parseIncomplete = (str) ->
   

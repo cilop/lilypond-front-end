@@ -23,6 +23,7 @@ documentView.directive 'documentView', ->
 
       if key is 'enter'
 
+        $scope.$emit('dataChanged', $scope.model)
         $scope.model.currentDuration = helper.getDuration($scope.model.input)
         if $scope.model.currentDuration <= 1
         
@@ -61,8 +62,8 @@ documentView.directive 'documentView', ->
     <input class="staffInput pitch" type="text" ng-model="model.input">
     <p ng-model="model.typing" class="inputDisplay"> {{ model.typing }} </p>
     </div>'
-  link: ($scope) ->
-    $scope.$watch('model', ->
-      console.log('model changed')
-      $scope.$emit('dataChanged', $scope.model)
-    , true)
+  # link: ($scope) ->
+  #   $scope.$watch('model', ->
+  #     console.log('model changed')
+  #     $scope.$emit('dataChanged', $scope.model)
+  #   , true)
