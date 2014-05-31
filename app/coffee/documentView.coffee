@@ -16,46 +16,35 @@ documentView.directive 'documentView', ->
 
     $scope.$on('leftChange', (currentScope, key, time) ->
 
-      # timeSig = value.time
-      # key = value.key
-
-      # console.log $scope
-      # console.log $scope.model.meta.measures
-
-      console.log $scope.model.meta.measures.length
-
-      if $scope.model.meta.measures.length > 0
-
-        console.log 'Left change'
-
-        $scope.model.meta.measures[0].events = $scope.model.meta.measures[0].events || {} 
-
-        $scope.model.meta.measures[0].events.key = key
-        $scope.model.meta.measures[0].events.time = time
+      $scope.currentKey = key
+      $scope.currentTime = time
 
       )
 
     $element.keydown((event) ->
-      key = helper.animateKey(event.which)
-      # console.log(event.which)
-      # console.log(key)
 
+      key = helper.animateKey(event.which)
       $scope.model.typing = helper.parseIncomplete($scope.model.input)
-      console.log($scope.model.currentDuration)
 
       if key is 'enter'
 
-        $scope.$emit('dataChanged', $scope.model)
         $scope.model.currentDuration = helper.getDuration($scope.model.input)
-
         
-        console.log 'Current duration is ' + helper.getMetaDuration($scope.model)
-        if $scope.model.currentDuration <= 1 #helper.getMetaDuration($scope.model)
+        if $scope.model.currentDuration <= (parseInt($scope.currentTime.top) / parseInt($scope.currentTime.bottom)) 
         
-          console.log('parsing notes')
           notes = helper.parseNotes($scope.model.input)
-          
-          $scope.model.meta.measures.push({})
+          console.log 'current events'
+          console.log $scope.currentTime
+
+          $scope.model.meta.measures.push({
+            events:
+              key: $scope.currentKey
+              time: 
+                n: $scope.currentTime.top
+                d: $scope.currentTime.bottom
+              barline: 'not defined'
+            })
+
           $scope.model.staves[0].measures.push({ notes: notes })
           staffEl = $compile('<svg ng-measure ng-model="measure"  class="document staff"/>')($scope)
           metaEl = $compile('<svg ng-meta-measure ng-model="measure"  class="document staff"/>')($scope)
@@ -64,6 +53,8 @@ documentView.directive 'documentView', ->
           $scope.model.input = ''
           $scope.model.typing = 'rendering note ..'
 
+          console.log $scope.model
+          $scope.$emit('dataChanged', $scope.model)
         else 
 
           alert 'Combination of notes exceeds allowed duration'
@@ -87,8 +78,8 @@ documentView.directive 'documentView', ->
     <input class="staffInput pitch" type="text" ng-model="model.input">
     <p ng-model="model.typing" class="inputDisplay"> {{ model.typing }} </p>
     </div>'
-  link: ($scope) ->
-    window.data = $scope.model
+  # link: ($scope) ->
+    # window.data = $scope.model
     # $scope.$watch('model', ->
     #   console.log('model changed')
     #   $scope.$emit('dataChanged', $scope.model)

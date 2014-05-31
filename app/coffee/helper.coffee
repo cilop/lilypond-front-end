@@ -1,7 +1,6 @@
 window.helper = {}
 
-helper.getMetaDuration = (dataModel) ->
-  parseInt(dataModel.meta.measures[0].events.time.n) / parseInt(dataModel.meta.measures[0].events.time.d)
+
 
 helper.getDuration = (str) ->
 

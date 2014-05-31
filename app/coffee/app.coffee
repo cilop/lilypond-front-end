@@ -60,9 +60,9 @@ angular.module('app', ['leftBar','documentView'])
 
   $scope.$on('dataChanged', (value) ->
     console.log(value.targetScope.model)
-    console.log(dataFactory)
+    # console.log(dataFactory)
     dataFactory = value.targetScope.model
-    console.log(dataFactory)
+    # console.log(dataFactory)
     console.log 'Updated store'
     )
 
@@ -147,6 +147,8 @@ angular.module('app', ['leftBar','documentView'])
     measures: measures
 
   data.meta = meta
+
+  window.data = data
 
   data
   
